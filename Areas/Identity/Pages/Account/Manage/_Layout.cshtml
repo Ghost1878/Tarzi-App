@@ -1,0 +1,63 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+    @{
+if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
+{
+Layout = (string)parentLayout;
+}
+else
+{
+Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+}
+} 
+<div class="row">
+    <div class="col-md-12 p-0">
+        <nav class="navbar navbar-expand navbar-dark bg-primary py-1">
+            <a href="#menu-toggle" id="menu-toggle" class="navbar-brand">
+            <span class="navbar-toggler-icon"></span></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02"
+            aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+                <div class="collapse navbar-collapse" id="navbarsExample02">
+                    <ul class="navbar-nav mr-auto">
+                        @if (SignInManager.IsSignedIn(User))
+                            {
+                                <li class="nav-item">
+                                    <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
+                                </li>
+                                <li class="nav-item nav-link btn btn-outline-light text-light">
+                                    <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                        <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                                    </form>
+                                </li>
+                            }
+                        <li class="nav-item">
+                        <a class="nav-link btn btn-outline-light text-light"  >mr.alagab@gmail.com</a>
+                        </li>
+                    </ul>
+                </div>
+        </nav>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Page Content -->
+    <div id="wrapper" class="col-md-2 toggled">
+            <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <partial name="_ManageNav" />
+        </div> <!-- /#sidebar-wrapper -->
+    </div>    
+    <div class="col-md-9" id="page-content-wrapper">
+        <div class="shadow-lg border">
+            <div class="p-2">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+@RenderSection("Scripts", required: false)
+}
