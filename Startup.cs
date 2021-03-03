@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
- using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +15,8 @@ using Microsoft.Extensions.Hosting;
 using Tarzi_Backend.Data.Repos;
 using Tarzi_Backend.Models;
 using Tarzi_Backend.Data.Services;
+using NToastNotify;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Tarzi_Backend
 {
@@ -29,21 +31,48 @@ namespace Tarzi_Backend
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {      
-            services.AddDbContext<ApplicationDbContext>(options=>options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection")));
-          services.AddScoped(typeof(IGenericRepo<>), typeof(GenericRepo<>));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddControllersWithViews();
-            services.AddRazorPages();
+        {
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection")));
+            services.AddScoped<CustomerService>();
+            services.AddScoped<CategoryService>();
+            services.AddScoped<DraperiesService>();
+            services.AddScoped<OrderService>();
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
+            services.AddMvc().AddRazorRuntimeCompilation();
+
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(
+                options =>
+                {
+                    options.LoginPath = "Account/Login";
+
+                });
+            // services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //     .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddControllersWithViews().AddNToastNotifyNoty(new NToastNotify.NotyOptions()
+            {
+                ProgressBar = true,
+                Timeout = 3500,
+                Theme = "mint"
+            });
+            // services.AddMvc().AddNToastNotifyToastr(new ToastrOptions()
+            // {
+            //     ProgressBar = false,
+            //     TimeOut = 2500,
+            //     PositionClass = ToastPositions.TopLeft
+            // });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
+        // This method getscalled by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+            app.UseNToastNotify();
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage(); 
+                app.UseDeveloperExceptionPage();
             }
             else
             {
@@ -53,7 +82,6 @@ namespace Tarzi_Backend
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
 
             app.UseAuthentication();
@@ -63,7 +91,7 @@ namespace Tarzi_Backend
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Account}/{action=Login}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

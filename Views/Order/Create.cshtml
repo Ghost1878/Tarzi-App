@@ -1,0 +1,266 @@
+@model CustomerOrderViewModel
+<!-- Creat new Customer Modal -->
+<div class="container-fluid mx-4 shadow mt-2">
+
+    <div class="row  bg-primary">
+        <div class="col-sm-6 px-0">
+            <h3 class="p-2 text-white">إضافة طلب جديد</h3>
+            @* <h3 class="p-2 text-white"> @(Model.Id != 0 ? "تعديـل بيانات العميل" : "إضـــافة عميــل جديد") </h3> *@
+        </div>
+        <div class="col-sm-6">
+            <a asp-action="Index" class="btn my-2 p-2  b-default float-left">رجوع الى القائمة</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-10 p-2">
+            <form asp-action="Create" method="POST" autocomplete="off">
+                <label>نوع العميل</label>
+                <div class="form-group border p-2" id="radios">
+                    @foreach (var customer in Model.CustomerTypes)
+                    {
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input name='CustomerType' value="@customer" asp-for="CustomerType" type="radio" class="form-check-input"> @customer
+                            </label>
+                        </div>
+                    }
+                </div>
+
+                <div id="JointApplicantInfo" style="display: none;" class="form-group">
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label asp-for="FullName">اسم الزبون</label>
+                            <input type="text" asp-for="FullName" class="form-control" placeholder="">
+                            <span asp-validation-for="FullName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col">
+                            <label asp-for="CustomerPhone">رقم الهاتف</label>
+                            <input type="text" asp-for="CustomerPhone" class="form-control" placeholder="">
+                            <span asp-validation-for="CustomerPhone" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col" id="RegisteredCustomer">
+                        <label asp-for="CustomerId"> العملاء </label>
+                        <select asp-for="CustomerId" class="custom-select" asp-items="@(new SelectList(Model.Customers,"Id","Name"))">
+                            <option value="" selected disabled>أختار اسم العميل</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col">
+                        <label asp-for="CategoryId">نوع الجلابية</label>
+                        <select class="custom-select" asp-items="@(new SelectList(Model.Categories,"Id","Name"))">
+                            <option selected disabled>اختار نوع الجلابية</option>
+                             
+                        </select>
+                        <span asp-validation-for="Quntity" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col">
+                        <label asp-for="Quntity">الكمــية</label>
+                        <input type="text" asp-for="Quntity" class="form-control" placeholder="">
+                        <span asp-validation-for="Quntity" class="text-danger"></span>
+                    </div>
+                </div>
+                <label>المال</label>
+                <div class="form-row border">
+                    <div class="form-group col-3">
+                        <label asp-for="TotalAmount">إجمالي السعر</label>
+                        <input type="text" asp-for="TotalAmount" class="form-control" placeholder="">
+                        <span asp-validation-for="TotalAmount" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-3">
+                        <label asp-for="ReceiptMonay">المبلغ المدفوع</label>
+                        <input type="text" asp-for="ReceiptMonay" class="form-control" placeholder="">
+                        <span asp-validation-for="ReceiptMonay" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col">
+                        <label asp-for="RemanentMonay">المبلغ المتبقي</label>
+                        <input type="text" asp-for="RemanentMonay" class="form-control" disabled>
+                        <span asp-validation-for="RemanentMonay" class="text-danger"></span>
+                    </div>
+                </div>
+                <label>المقاسات</label>
+                <div class="form-row border">
+                    <div class="form-group col">
+                        <label asp-for="Neck">الرقبة</label>
+                        <input type="text" asp-for="Neck" class="form-control" placeholder="">
+                        <span asp-validation-for="Neck" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col">
+                        <label asp-for="Shoulder">الكتف</label>
+                        <input type="text" asp-for="Shoulder" class="form-control" placeholder="">
+                        <span asp-validation-for="Shoulder" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col">
+                        <label asp-for="SleeveLength">طول الكم</label>
+                        <input type="text" asp-for="SleeveLength" class="form-control">
+                        <span asp-validation-for="SleeveLength" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col">
+                        <label asp-for="Sleevewasae">وسع الكم</label>
+                        <input type="text" asp-for="Sleevewasae" class="form-control">
+                        <span asp-validation-for="Sleevewasae" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col">
+                        <label asp-for="Longness">الطول  </label>
+                        <input type="text" asp-for="Longness" class="form-control">
+                        <span asp-validation-for="Longness" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col">
+                        <label asp-for="Side">الجنبة</label>
+                        <input type="text" asp-for="Side" class="form-control">
+                        <span asp-validation-for="Side" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-row"> 
+                    <div class="form-group col mt-3">
+                        <input type="checkbox" value="DraperyFrom" checked  id="checkbox"/>
+                        <label>القماش من المحل</label>
+                    </div>
+                    <div class="form-group col" id="textbox" style="display:none">
+                        <input type="text" value="@Model.DraperyLength" name="DraperyLength" asp-for="DraperyLength" class="form-control">
+                    </div>
+                </div>
+                    <div class="form-group">
+                        <label asp-for="OrderDate">تاريخ التسليم</label>
+                        <input type="text" id="datepicker" asp-for="OrderDate" class="form-control was-validated" placeholder="">
+                        <span asp-validation-for="OrderDate" asp-format="{0:dd-MM-yyyy}" class="text-danger"></span>
+                    </div> <div class="form-group">
+                        <input type="submit" class="btn col-2 b-primary float-left" value="حفظ">
+                    </div>
+</form>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(function () {
+             
+
+            var checkedRadio = $('#radios :radio:checked').val();
+            var radios = $('[name="CustomerType"]:radio');
+
+
+            var checkedBox = document.getElementById("checkbox").checked; //$('#checkbox :checkbox:checked').val();
+            var drapery = $('[name="DraperyLength"]:checkbox');
+
+            radios.on("change", function () {
+                if (checkedRadio == "عميل مسجل") {
+                    $("#JointApplicantInfo").toggle();
+                    $("#RegisteredCustomer").toggle();
+                }
+            })
+
+            drapery.on("click", function () {
+                 
+                if (checkedBox != true) {
+                    $("#textbox").show();
+                }
+            });
+            //if ($(this).prop("checked")) {
+            //    $("#JointApplicantInfo").toggle();
+            //    $("#RegisteredCustomer").hide();
+            //}
+
+
+        });
+
+        $('#datepicker').datepicker({
+            format: "yyyy-mm-dd",
+            autoclose: true,
+            rtl:true
+            
+        });
+
+                        //$("#JointApplicantInfo").hide();
+
+                        //$("input[name='JointOwner']").change(function () {
+                        //    $("#JointApplicantInfo").toggle();
+                        //});
+    </script>
+
+}
+
+@*
+
+
+
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                <span class="input-group-text">متر</span>
+            </div>
+
+
+             foreach (var customerType in Model.Options)
+        {
+        <input as-for="customerType" type="radio" value="@customerType" class="form-check-input" /> @customerType
+        }
+
+        <div class="form-check form-check-inline">
+            <label class="form-check-label">
+                <input class="form-check-input" name='JointOwner' asp-for="CustomerType" type="radio" value=""> عميل مسجل
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <label class="form-check-label">
+                <input class="form-check-input" name='JointOwner' asp-for="CustomerType" type="radio" value=""> زبون
+            </label>
+        </div>
+    </div>
+
+
+            <div class="form-group">
+                <label asp-for="Customer"></label>
+                <input type="text" asp-for="Customer" class="form-control" placeholder="مثال: محمد عبدالله    ">
+                <select>
+                    <option></option>
+                </select>
+                <span asp-validation-for="Customer" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Phone"></label>
+                <input type="tel" asp-for="Phone" class="form-control" placeholder="0123456789" minlength="10" maxlength="10">
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn b-primary float-left mb-2" value="حـفـظ" />
+            </div> *@
+@*<div class="modal fade" data-dismiss="false" id="customerForm" tabindex="-1" role="dialog">
+    <a href="javascript:;" class="js-delete">Delete</a>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">*@
+@*</div>
+
+            <div class="modal-footer">
+                <button type="button" class="b-primary" data-save="modal">save</button>
+                </div>
+            </div>
+        </div>
+    </div> *@
+@*
+    <div class="spinner-border " role="status"><span class="sr-only">Loading...</span></div>
+                    <div class="input-group"><div class="input-group-prepend"><span class="input-group-text">First and last name</span></div><input type="text"aria-label="First name"class="form-control"><input type="text"aria-label="Last name"class="form-control"></div>
+
+
+
+                    <div class="custom-control custom-switch"><input type="checkbox"class="custom-control-input"id="customSwitch1"><label class="custom-control-label"for="customSwitch1">Toggle this switch element</label></div>
+*@

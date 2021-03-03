@@ -1,0 +1,49 @@
+﻿@model DraperiesType
+<!-- Creat new Customer Modal -->
+
+<div class="container-fluid border my-2  mx-4 shadow">
+    <div class="row  bg-primary">
+        <div class="col-sm-6 px-0">
+            <h3 class="p-2 text-white"> @(Model.Id != 0 ? "تعديـل بيانات القماش" : "إضـــافة قماش جديد") </h3>
+        </div>
+        <div class="col-sm-6">
+            <a asp-action="Index" class="btn my-2 p-2  b-default float-left">رجوع الى القائمة</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-10 p-2">
+            <form asp-action="Create" method="POST" autocomplete="off"> 
+                @if (Model.Id != 0)
+                {
+                    <input type="hidden" asp-for="Id" />
+                }
+                <div class="form-group">
+                    <label asp-for="DraperyName"></label>
+                    <input type="text" asp-for="DraperyName" autofocus class="form-control" />
+                    <span asp-validation-for="DraperyName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <textarea asp-for="Description" class="form-control"></textarea> 
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AvailableLength"></label>
+                    <input type="number" asp-for="AvailableLength" class="form-control" />
+                    <span asp-validation-for="AvailableLength" class="text-danger"></span>
+                </div>
+                 <div class="form-group"> 
+                    <input type="submit" class="btn b-primary float-left mb-2" value="حـفـظ" />
+                </div> 
+                <div class="form-group">
+                    <a asp-action="Index" class=" float-left ml-5 mt-2 bold">إلغــــاء</a>  
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+ 
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

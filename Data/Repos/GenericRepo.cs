@@ -1,34 +1,55 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Tarzi_Backend.Data.Repos
 {
-    public class GenericRepo<T> : IGenericRepo<T> where T : class
+    public class GenericRepo<T, TContext> : IGenericRepo<T> where T : class
+    where TContext : DbContext
     {
-        private readonly ApplicationDbContext _db;
+        private readonly TContext _db;
 
-        public GenericRepo(ApplicationDbContext db)
+        public GenericRepo(TContext db)
         {
             _db = db;
         }
+
         public async Task Add(T t)
         {
-            if (t != null)
+            try
             {
-                _db.Set<T>().Add(t);
-                await _db.SaveChangesAsync();
+                if (t != null)
+                {
+                    _db.Set<T>().Add(t);
+                    await _db.SaveChangesAsync();
+                }
+            }
+            catch (System.Exception)
+            {
+
+                throw;
             }
         }
 
         public async Task Delete(int id)
         {
-            if (id != 0)
+            try
             {
-                var entity = await _db.Set<T>().FindAsync(id);
-                _db.Set<T>().Remove(entity);
-                await _db.SaveChangesAsync();
+                if (id != 0)
+                {
+                    var entity = await _db.Set<T>().FindAsync(id);
+                    _db.Set<T>().Remove(entity);
+                    await _db.SaveChangesAsync();
+                }
             }
+            catch (System.Exception)
+            {
+
+            }
+
         }
 
         public async Task<IEnumerable<T>> GetAll()
@@ -38,17 +59,32 @@ namespace Tarzi_Backend.Data.Repos
 
         public async Task<T> GetById(int id)
         {
-            var entity = await _db.Set<T>().FindAsync(id);
-            return entity;
+            try
+            {
+                var entity = await _db.Set<T>().FindAsync(id);
+                return entity;
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
         }
 
-        public async Task Update(int id)
+        public async Task Update(T t)
         {
-            if (id != 0)
+            try
             {
-                var entity = await GetById(id);
-                _db.Set<T>().Update(entity);
-                await _db.SaveChangesAsync();
+                if (t != null)
+                {
+                    _db.Set<T>().Update(t);
+                    await _db.SaveChangesAsync();
+                }
+            }
+            catch (System.Exception)
+            {
+
+                throw;
             }
         }
     }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Tarzi_Backend.Data.Repos;
@@ -11,22 +13,28 @@ using Tarzi_Backend.Models;
 
 namespace Tarzi_Backend.Controllers
 {
+    //[Authorize]
     public class HomeController : Controller
     {
-        private readonly IGenericRepo<Customer> _repo;
+        private readonly CustomerService _repo;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(IGenericRepo<Customer> repo, ILogger<HomeController> logger)
+        public HomeController(CustomerService repo, ILogger<HomeController> logger, SignInManager<ApplicationUser> signInManager)
         {
             _logger = logger;
             _repo = repo;
+            _signInManager = signInManager;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Login()
         {
-            var customers = await _repo.GetAll();
-            if (customers == null)
-                return NoContent();
-            return View(customers);
+            return View();
+        }
+        public IActionResult Index()
+        {
+           if (!User.Identity.IsAuthenticated)
+                return View();
+            return RedirectToAction("DashBoard", "Account");
         }
 
         public IActionResult Privacy()

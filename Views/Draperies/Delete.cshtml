@@ -1,0 +1,50 @@
+@model DraperiesType
+
+
+<div class="container shadow border my-2">
+
+    <div class="row  bg-primary">
+        <div class="col-sm-6 px-0">
+        </div>
+        <div class="col-sm-6">
+            <a asp-action="Index" class="btn my-2 p-2  b-default float-left">رجوع الى القائمة</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 p-2">
+            <h4>حذف الفمـــاش: @Model.DraperyName</h4>
+            <table class="table table-striped p-4">
+                <thead class="thead-inverse">
+                    <tr>
+                        <td>الاسم</td>
+                        <td>
+                            @Model.DraperyName
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>الوصف</td>
+                        <td>
+                            @Model.Description
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>الكمية المتوفرة </td>
+                        <td>
+                            @Model.AvailableLength <small>متر</small>
+                        </td>
+                    </tr>
+                </thead>
+
+            </table>
+            <div class="form-row">
+                <a asp-action="Index" style="line-height: 35px;text-decoration: none;"
+                    class="p-1 b-default ml-2">إلغــــاء</a>
+                <form asp-action="Delete" method="POST">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="submit" class="btn b-delete" value="حذف" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

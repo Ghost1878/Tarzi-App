@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tarzi-Backend", "Tarzi-Backend.csproj", "{760B7104-7926-4CB6-9E41-B213C19A0C3B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{760B7104-7926-4CB6-9E41-B213C19A0C3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{760B7104-7926-4CB6-9E41-B213C19A0C3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{760B7104-7926-4CB6-9E41-B213C19A0C3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{760B7104-7926-4CB6-9E41-B213C19A0C3B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BA8280C1-28AE-4A4C-8365-8157FC48F70B}
+	EndGlobalSection
+EndGlobal

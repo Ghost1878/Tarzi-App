@@ -1,0 +1,100 @@
+﻿@model IEnumerable<Category>
+
+<div class="container-fluid mx-4 py-2 card shadow">
+    <div class="row">
+        <div class="col-sm-6">
+            <h2>
+                <i class="fa fa-list fa-2x"></i>
+                قائــمة الأصناف
+            </h2>
+        </div>
+        <div class="col-sm-6">
+            <a class="btn b-primary float-left mb-1" asp-action="Create">إضافة صنف جديد</a>
+        </div>
+    </div>
+    <div class="row">
+        @if (Model.Count() > 0)
+        {
+            <table class="table d-table table-striped table-sm">
+                <thead class="bg-primary text-white text-center py-3">
+                    <tr>
+                        <th>إسم الصنف</th>
+                        <th> الوصف</th>
+                        <th>تاريخ الإضــافة</th>
+                        <th>العمليــات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var category in Model)
+                    {
+                        <tr>
+                            <td>@category.Name</td>
+                            <td>@category.Description</td>
+                            <td>@category.CreatedAt</td>
+                            <td>
+                                <a class="btn b-default p-1" asp-action="Create" asp-route-id="@category.Id">
+                                    <i class="fa fa-pencil-alt" aria-hidden="true"></i>
+                                    تعديل
+                                </a>
+                                <a href="javascript:;" data-id="@category.Id" class="btn border p-1 js-delete b-default">
+                                    <i class=" fa fa-trash " style="color: #df3434;"></i>
+                                    حذف
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <h3 class="mx-auto">لا يوجد أصناف مضافة</h3>
+        }
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            $('.js-delete').on('click', function () {
+
+                var btn = $(this);
+                var Url = '/api/ApiCategory/' + btn.data('id');
+                bootbox.confirm({
+                    message: "هل تريد حذف هذا العميل",
+                    buttons: {
+                        confirm: {
+                            label: 'نعم',
+                            className: 'btn-danger mr-2'
+                        },
+                        cancel: {
+                            label: 'لا',
+                            className: 'd-default border'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            if (result) {
+                                $.ajax({
+                                    url: Url,
+                                    method: 'DELETE',
+                                    success: function () {
+                                        alert('تم حذف العميل بنجاح!')
+                                    },
+                                    error: function () {
+                                        alert('خطأ اثناء عملية الحذف')
+                                    }
+
+                                });
+                            }
+
+                        }
+                    }
+                });
+
+            });
+
+        });
+    </script>
+}

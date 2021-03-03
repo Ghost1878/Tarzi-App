@@ -1,0 +1,41 @@
+@model Login
+<br><br><br>
+
+<div class="container">
+    <div class="row">
+        <div class="text-center mx-auto mt-2">
+            <h1 class="mt-2 home">مرحــباً</h1>
+            <h2>محلات عبدالله لأعمال الخياطة</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mx-auto mt-5">
+            <div class=" card text-right">
+                <img class="card-img-top" src="holder.js/100px180/" alt="">
+                <div class="card-body">
+                    <h4 class="card-title text-center">تسجيل الدخول</h4>
+
+                    <form method="post" asp-route-returnurl="@ViewData["ReturnUrl"]">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <label for="Email">البريد الإلكتروني</label>
+                            <input type="text" asp-for="Email" class="form-control" placeholder="Example@mail.com" />
+                            <small asp-validation-for="Email" class="text-muted"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="">كلمة المرور</label>
+                            <input type="password" asp-for="Password" class="form-control" />
+                            <small asp-validation-for="Password" class="text-muted"></small>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="تسجيل دخول" class="btn b-primary form-control">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"/>
+}

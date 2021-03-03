@@ -1,0 +1,35 @@
+@model Customer
+<div>
+    <h3>  تعديل </h3>
+<form asp-action="Update" method="POST">
+   
+        <input type="hidden" asp-for="Id" />
+   
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Name"></label> 
+        @*<select asp-for="CustomerId" class="custom-select" asp-items="@(new SelectList(Model.Customers,"Id","Name"))">
+            <option value="" selected disabled>أختار اسم العميل</option>
+        </select>*@
+        <small asp-validation-for="Name" class="text-muted"></small>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input type="email" asp-for="Email" class="form-control" placeholder="jefo@sudan.com" aria-describedby="helpId">
+        <small asp-validation-for="Email" class="text-muted"></small>
+    </div>
+    <div class="form-group">
+        <label asp-for="Phone"></label>
+        <input type="number" asp-for="Phone" class="form-control" placeholder="0123456789" maxlength="10" aria-describedby="helpId">
+        <small asp-validation-for="Phone" class="text-muted"></small>
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn b-primary float-left" value="حـفـظ"/>
+    </div>
+</form>
+
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"  />
+}

@@ -1,19 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Tarzi_Backend.Models;
 
 namespace Tarzi_Backend.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
-        public DbSet<Category> categories { get; set; }
-        public DbSet<Customer> customers { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<DraperiesType> DraperiesTypes { get; set; }
+        public DbSet<Measure> Measures { get; set; }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<Order>()
+                .HasOne(o => o.OrderDetails)
+                .WithOne(o => o.Order)
+                .HasForeignKey<OrderDetails>(o => o.OrderDetailsId);
+            //builder.Entity<Order>()
+            //.HasOne(b => b.Measure)
+            //.WithOne(i => i.Order)
+            //.HasForeignKey<Measure>(b => b.Id);
+
+
+            builder.Entity<ApplicationUser>().ToTable("Users", "Security");
+            builder.Entity<IdentityRole>().ToTable("Roles", "Security");
+            builder.Entity<IdentityUserRole<string>>().ToTable("UserRoles", "Security");
+            builder.Entity<IdentityUserClaim<string>>().ToTable("UserClims", "Security");
+            builder.Entity<IdentityUserLogin<string>>().ToTable("UserLogins", "Security");
+            builder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims", "Security");
+            builder.Entity<IdentityUserToken<string>>().ToTable("UserTokens", "Security");
+        }
     }
 }

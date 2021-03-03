@@ -7,7 +7,7 @@ namespace Tarzi_Backend.Data.Repos
     {
         Task<IEnumerable<T>> GetAll();
         Task Add(T t);
-        Task Update(int id);
+        Task Update(T t);
         Task Delete(int id);
         Task<T> GetById(int id);
     }

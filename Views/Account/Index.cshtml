@@ -1,0 +1,42 @@
+@model List< ApplicationUser>
+
+<div class="container-fluid mt-2 mx-4 py-2 card shadow">
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>
+                <i class="fa fa-list" aria-hidden="true"></i>
+                قائــمة المســتخدمين
+            </h3>
+        </div>
+        <div class="col-sm-6">
+            <a class="btn b-primary float-left mb-1" asp-action="Register">إضافة مستخدم جديد</a>
+        </div>
+    </div>
+    <div class="row">
+
+        <table class="table d-table table-striped table-sm">
+            <thead class="bg-primary text-white text-center py-3">
+                <tr>
+                    <th>الإسم </th>
+                    <th> البريد الإلكتروني</th>
+                    <th>رقم الهاتف</th>
+                    <th>العمــليات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.FirstName @user.LastName</td>
+                        <td>@user.Email</td>
+                        <td>@user.PhoneNumber</td>
+                        <td>
+                            <a class="border p-1 btn" asp-action="Register" asp-route-id="@user.Id">تعديل</a> |
+                            <a asp-action="Delete" asp-route-id="@user.Id" class="btn b-delete p-1">حذف</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
