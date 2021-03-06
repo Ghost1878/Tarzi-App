@@ -17,15 +17,15 @@ namespace Tarzi_Backend.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetails> OrderDetails { get; set; }
         public DbSet<DraperiesType> DraperiesTypes { get; set; }
-        public DbSet<Measure> Measures { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<Order>()
-                .HasOne(o => o.OrderDetails)
-                .WithOne(o => o.Order)
-                .HasForeignKey<OrderDetails>(o => o.OrderDetailsId);
+            // builder.Entity<Order>()
+            //     .HasOne(o => o.OrderDetails)
+            //     .WithOne(o => o.Order)
+            //     .HasForeignKey<OrderDetails>(o => o.OrderDetailsId);
             //builder.Entity<Order>()
             //.HasOne(b => b.Measure)
             //.WithOne(i => i.Order)

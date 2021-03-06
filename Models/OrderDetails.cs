@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace Tarzi_Backend.Models
 {
-    public class OrderDetails:Shared
+    public class OrderDetails : Shared
     {
-        public int OrderDetailsId { get; set; }
+        public int Id { get; set; }
         public int OrderId { get; set; }
         [ForeignKey("OrderId")]
         public Order Order { get; set; }
+        public DateTime ReceiptDate { get; set; }
 
         public int Quantity { get; set; }
         public double UnitPrice { get; set; }
@@ -30,5 +31,10 @@ namespace Tarzi_Backend.Models
 
         /******  Drapery from  ******/
         public string DraperyFrom { get; set; }
+        public int DarperyNeededLength { get; set; }
+
+        /********* customer details ********/
+        public string CustomerName { get; set; }
+        public string Phone { get; set; }
     }
 }

@@ -10,7 +10,7 @@ using Tarzi_Backend.Models;
 
 namespace Tarzi_Backend.Controllers
 {
-   // [Authorize]
+    // [Authorize]
     public class CategoriesController : Controller
     {
         private readonly CategoryService _categoryService;
@@ -53,11 +53,15 @@ namespace Tarzi_Backend.Controllers
                     if (Category.Id == 0)
                     {
                         await _categoryService.Add(Category);
+                        TempData["message"] = "تم حفظ الصنف";
+                        TempData["title"] = " حفظ الصنف";
                         return RedirectToAction(nameof(Index));
                     }
                     else
                     {
                         await _categoryService.Update(Category);
+                        TempData["message"] = "تم تعديل الصنف";
+
                         return RedirectToAction(nameof(Index));
                     }
                 }

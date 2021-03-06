@@ -26,35 +26,62 @@ namespace Tarzi_Backend.Controllers
             _categoryService = categoryService;
             _customerService = customerService;
         }
-        public  IActionResult Index()
+        public IActionResult Index()
         {
-           // var orders = await _orderService.GetAll();
+            // var orders = await _orderService.GetAll();
             return View();
         }
         [HttpGet]
         [Route("create-order")]
-        public async Task<IActionResult>  Create()
+        public IActionResult Create()
         {
-
-
-            //lists.(new SelectListItem { Text = "عميل مسجل", Value = "1", Selected = true });
-            //lists.Add(new SelectListItem { Text = "زبون", Value = "0", Selected = false });
             var CustomerOrder = new CustomerOrderViewModel
             {
                 Customers = _customerService.GetAll().Result.ToList(),
                 Categories = _categoryService.GetAll().Result.ToList(),
 
 
-            }; 
+            };
             return View(CustomerOrder);
         }
+        [Route("create-order")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CustomerOrderViewModel model)
+        public IActionResult Create(CustomerOrderViewModel model)
         {
+
+            double tot = model.TotalAmount;
+            double rec = model.ReceiptMonay;
+            double rem = tot - rec;
             if (ModelState.IsValid)
             {
-
+                Order order = new Order
+                {
+                    CategoryId = model.CategoryId,
+                    ReceiptDate = model.ReceiptDate,
+                    OrderDetailsId = model.OrderDetailsId,
+                    CustomerId = model.CustomerId,
+                };
+                OrderDetails orderDetails = new OrderDetails
+                {
+                    CustomerName = model.FullName,
+                    DarperyNeededLength = model.DarperyNeededLength,
+                    Longness = model.Longness,
+                    Neck = model.Neck,
+                    Shoulder = model.Shoulder,
+                    Side = model.Side,
+                    SleeveLength = model.SleeveLength,
+                    Phone = model.CustomerPhone,
+                    Quantity = model.Quntity,
+                    TotalAmount = model.TotalAmount,
+                    ReceiptMonay = model.ReceiptMonay,
+                    RemanentMonay = rem,
+                    Sleevewasae = model.Sleevewasae,
+                    DraperyFrom = model.DraperyFrom,
+                    CreatedAt = model.CreatedAt,
+                    ReceiptDate = model.ReceiptDate,
+                    OrderId = model.OrderId
+                };
             }
             return View();
         }

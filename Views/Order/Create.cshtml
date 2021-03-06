@@ -51,11 +51,11 @@
 
                     <div class="form-group col">
                         <label asp-for="CategoryId">نوع الجلابية</label>
-                        <select class="custom-select" asp-items="@(new SelectList(Model.Categories,"Id","Name"))">
+                        <select asp-for="CategoryId" class="custom-select" asp-items="@(new SelectList(Model.Categories,"Id","Name"))">
                             <option selected disabled>اختار نوع الجلابية</option>
-                             
+
                         </select>
-                        <span asp-validation-for="Quntity" class="text-danger"></span>
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
                     </div>
                     <div class="form-group col">
                         <label asp-for="Quntity">الكمــية</label>
@@ -67,17 +67,17 @@
                 <div class="form-row border">
                     <div class="form-group col-3">
                         <label asp-for="TotalAmount">إجمالي السعر</label>
-                        <input type="text" asp-for="TotalAmount" class="form-control" placeholder="">
+                        <input type="text" asp-for="TotalAmount" id="TotalAmount" class="form-control" placeholder="">
                         <span asp-validation-for="TotalAmount" class="text-danger"></span>
                     </div>
                     <div class="form-group col-3">
                         <label asp-for="ReceiptMonay">المبلغ المدفوع</label>
-                        <input type="text" asp-for="ReceiptMonay" class="form-control" placeholder="">
+                        <input type="text" asp-for="ReceiptMonay" id="ReceiptMonay" class="form-control ReceiptMonay" placeholder="">
                         <span asp-validation-for="ReceiptMonay" class="text-danger"></span>
                     </div>
                     <div class="form-group col">
-                        <label asp-for="RemanentMonay">المبلغ المتبقي</label>
-                        <input type="text" asp-for="RemanentMonay" class="form-control" disabled>
+                        <label asp-for="RemanentMonay">المبلغ المتبقي</label> 
+                        <input type="text" asp-for="RemanentMonay" id="RemanentMonay" style="color: #f00;" class="bold form-control" disabled>
                         <span asp-validation-for="RemanentMonay" class="text-danger"></span>
                     </div>
                 </div>
@@ -114,23 +114,29 @@
                         <span asp-validation-for="Side" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="form-row"> 
-                    <div class="form-group col mt-3">
-                        <input type="checkbox" value="DraperyFrom" checked  id="checkbox"/>
+                
+                    <div class="form-group col-2 mt-3">
+                        <input type="checkbox" asp-for="DraperyFrom" value="DraperyFrom" id="DraperyFrom" />
                         <label>القماش من المحل</label>
                     </div>
-                    <div class="form-group col" id="textbox" style="display:none">
-                        <input type="text" value="@Model.DraperyLength" name="DraperyLength" asp-for="DraperyLength" class="form-control">
+                    <div class="form-row">
+                    <div class="form-group col" id="textboxDraperyLength" style="display:none">
+                        <label>طول القماش المطلوب    </label>
+                        <input type="text" name="DarperyNeededLength" asp-for="DarperyNeededLength" class="form-control">
+                        <span asp-validation-for="DarperyNeededLength" class="text-danger"></span>
+
                     </div>
+                    <div class="form-group col">
+                    <label asp-for="ReceiptDate">تاريخ التسليم</label>
+                    <input type="text" id="datepicker" asp-for="ReceiptDate" class="form-control was-validated">
+                    <span asp-validation-for="ReceiptDate" class="text-danger"></span>
                 </div>
-                    <div class="form-group">
-                        <label asp-for="OrderDate">تاريخ التسليم</label>
-                        <input type="text" id="datepicker" asp-for="OrderDate" class="form-control was-validated" placeholder="">
-                        <span asp-validation-for="OrderDate" asp-format="{0:dd-MM-yyyy}" class="text-danger"></span>
-                    </div> <div class="form-group">
-                        <input type="submit" class="btn col-2 b-primary float-left" value="حفظ">
-                    </div>
-</form>
+                </div>
+                
+                <div class="form-group">
+                    <input type="submit" class="btn col-2 b-primary float-left" value="حفظ">
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -141,17 +147,12 @@
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />
 
-    <script>
-        $(function () {
-             
-
+    <script> 
+        $(function () { 
+              
             var checkedRadio = $('#radios :radio:checked').val();
-            var radios = $('[name="CustomerType"]:radio');
-
-
-            var checkedBox = document.getElementById("checkbox").checked; //$('#checkbox :checkbox:checked').val();
-            var drapery = $('[name="DraperyLength"]:checkbox');
-
+            var radios = $('[name="CustomerType"]:radio'); 
+           
             radios.on("change", function () {
                 if (checkedRadio == "عميل مسجل") {
                     $("#JointApplicantInfo").toggle();
@@ -159,40 +160,67 @@
                 }
             })
 
-            drapery.on("click", function () {
-                 
-                if (checkedBox != true) {
-                    $("#textbox").show();
+            $("#DraperyFrom").click(function(){
+                if($(this).is(":checked")){
+                    $("#textboxDraperyLength").show();
+                }else{
+                    $("#textboxDraperyLength").hide();
+
                 }
             });
-            //if ($(this).prop("checked")) {
-            //    $("#JointApplicantInfo").toggle();
-            //    $("#RegisteredCustomer").hide();
-            //}
-
-
+                $('#ReceiptMonay').keyup(function(){ 
+                    var RemanentMonay = 0;
+                    var TotalAmount = parseInt($("#TotalAmount").val());
+                    var ReceiptMonay  = parseInt($("#ReceiptMonay").val());
+                    var RemanentMonay = TotalAmount - ReceiptMonay;
+$("#RemanentMonay").val(RemanentMonay);
+                    document.getElementById("#RemanentMonay").value =  RemanentMonay;
+                     if(ReceiptMonay > TotalAmount){
+                    $("#RemanentMonay").val("المبلغ المدفوع اكبر من اجمالي السعر");
+                   
+                    }
+                });
+            
         });
 
         $('#datepicker').datepicker({
             format: "yyyy-mm-dd",
             autoclose: true,
-            rtl:true
-            
-        });
-
-                        //$("#JointApplicantInfo").hide();
-
-                        //$("input[name='JointOwner']").change(function () {
-                        //    $("#JointApplicantInfo").toggle();
-                        //});
+            rtl: true 
+        });                 
     </script>
 
 }
 
-@*
+ 
 
 
+ @* 
+ 
+  // $('#ReceiptMonay').on('keyup',function(){
+               // var RemanentMonay = 0;
+               // var TotalAmount = parseInt($("#TotalAmount").val());
+                // var ReceiptMonay  = parseInt($("#ReceiptMonay").val());
+                // var RemanentMonay = TotalAmount - ReceiptMonay;
+          //  }); * @
+ function showTextBox()
+        {
+document.getElementById("checkbox");
+var textBox = document.getElementById("textbox");
+if(checkBox.checked == true)
+{ //if ($(this).prop("checked")) {
+            //    $("#JointApplicantInfo").toggle();
+            //    $("#RegisteredCustomer").hide();
+            //}
+ //$("#JointApplicantInfo").hide();
 
+                            //$("input[name='JointOwner']").change(function () {
+                            //    $("#JointApplicantInfo").toggle();
+                            //});
+
+
+}
+        } * @
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">

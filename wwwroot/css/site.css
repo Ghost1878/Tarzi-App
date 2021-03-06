@@ -16,8 +16,8 @@
 	height: 30px !important;
 	padding: 3px !important
 }*/
-.nav-link{
-	cursor:pointer !important
+.nav-link {
+	cursor: pointer !important;
 }
 .text-dark {
 	color: #2e4363 !important;
@@ -145,7 +145,7 @@ textarea.invalid {
 body {
 	overflow-x: hidden;
 	font-family: "Cairo";
-	font-size: 16px !important
+	font-size: 16px !important;
 }
 
 #wrapper {
@@ -522,6 +522,9 @@ header {
 }
 
 /********** bootbox customization***********/
+.input-group-append {
+	display: inline-block;
+}
 .bootbox-body {
 	text-align: right !important;
 	font-size: 1.5rem !important;
@@ -532,5 +535,37 @@ header {
 	background-color: #5c6f8d7e;
 }
 .bootbox-close-button {
-	float: left !important;
+	float: right !important;
+}
+#toast-container {
+	margin-bottom: 5em !important;
+	margin-left: 1.6em !important;
+}
+#toast-container > div {
+	height: 80px !important;
+}
+.toast-title {
+	text-align: center !important;
+	line-height: 0 !important;
+	font-size: 1.4em !important;
+}
+.toast-message {
+	text-align: right !important;
+	font-size: 1.2em !important;
+	font-weight: bolder;
+	line-height: 3 !important;
+}
+/*
+.toast-success {
+	float: right !important;
+	background-position: 0 0 1.2em 0 !important;
+	padding-left: 15px !important;
+} 
+float: right;
+font-size: 1.2em;
+*/
+.toast-close-button {
+	position: relative;
+	top: -0.7em !important;
+	opacity: 1 !important;
 }

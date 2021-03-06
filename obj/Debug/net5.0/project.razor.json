@@ -15670,11 +15670,6 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\Mohammed\\Pictures\\Tarzi-Backend\\Views\\Customer\\Edit.cshtml",
-      "TargetPath": "Views\\Customer\\Edit.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "c:\\Users\\Mohammed\\Pictures\\Tarzi-Backend\\Views\\Shared\\_SideBarPartial.cshtml",
       "TargetPath": "Views\\Shared\\_SideBarPartial.cshtml",
       "FileKind": "mvc"
@@ -15727,6 +15722,11 @@
     {
       "FilePath": "c:\\Users\\Mohammed\\Pictures\\Tarzi-Backend\\Views\\Account\\Index.cshtml",
       "TargetPath": "Views\\Account\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\Mohammed\\Pictures\\Tarzi-Backend\\Views\\Customer\\AddOrder.cshtml",
+      "TargetPath": "Views\\Customer\\AddOrder.cshtml",
       "FileKind": "mvc"
     },
     {

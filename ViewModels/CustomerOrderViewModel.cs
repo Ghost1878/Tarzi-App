@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Web.Mvc;
 using Tarzi_Backend.Models;
 
 namespace Tarzi_Backend.ViewModels
@@ -14,10 +13,12 @@ namespace Tarzi_Backend.ViewModels
 
 
         public int CustomerId { get; set; }
-        public int CustomerPhone { get; set; }
+        public string CustomerPhone { get; set; }
         public string FullName { get; set; }
         public Customer Customer { get; set; }
         public List<Customer> Customers { get; set; }
+        public string CustomerType { get; set; } = "عميل مسجل";
+        public string[] CustomerTypes = new[] { "عميل مسجل", "زبون" };
 
 
         public int CategoryId { get; set; }
@@ -26,7 +27,7 @@ namespace Tarzi_Backend.ViewModels
         public List<Category> Categories { get; set; }
 
 
-        
+        public int OrderId { get; set; }
         public int Quntity { get; set; }
         public double UnitPrice { get; set; }
         public double TotalAmount { get; set; }
@@ -45,19 +46,20 @@ namespace Tarzi_Backend.ViewModels
         public int Neck { get; set; }
         public int Side { get; set; }
 
-        public bool DraperyFrom { get; set; }
-        public bool DraperyLength { get; set; }
-        public string CustomerType { get; set; } = "عميل مسجل";
-        public string[] CustomerTypes = new[] { "عميل مسجل", "زبون" };
+
+
+        public int OrderDetailsId { get; set; }
+        public string DraperyFrom { get; set; }
+        public int DarperyNeededLength { get; set; }
     }
 
 
 }
-    /** Customer Type**/
-    //  public CustomerType CustomerType { get; set; }
-        //public bool CustomerType { get; set; }
-        //public  List< CustomerType>  Options { get; set; }
- 
+/** Customer Type**/
+//  public CustomerType CustomerType { get; set; }
+//public bool CustomerType { get; set; }
+//public  List< CustomerType>  Options { get; set; }
+
 //public enum CustomerType
 //{
 //    Customer, Client

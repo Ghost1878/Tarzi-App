@@ -650,12 +650,6 @@ C:\Users\Mohammed\Pictures\Tarzi-Backend\obj\Debug\net5.0\Razor\Views\Account\Re
 C:\Users\Mohammed\Pictures\Tarzi-Backend\obj\Debug\net5.0\Razor\Views\Account\Dashboard.cshtml.g.cs
 C:\Users\Mohammed\Pictures\Tarzi-Backend\obj\Debug\net5.0\Razor\Views\Order\Create.cshtml.g.cs
 C:\Users\Mohammed\Pictures\Tarzi-Backend\obj\Debug\net5.0\Tarzi-Backend.csprojAssemblyReference.cache
-C:\Users\Mohammed\Pictures\Tarzi-Backend\bin\Debug\net5.0\FoolproofValidation.dll
-C:\Users\Mohammed\Pictures\Tarzi-Backend\bin\Debug\net5.0\System.Web.Mvc.dll
-C:\Users\Mohammed\Pictures\Tarzi-Backend\bin\Debug\net5.0\System.Web.Razor.dll
-C:\Users\Mohammed\Pictures\Tarzi-Backend\bin\Debug\net5.0\System.Web.Helpers.dll
-C:\Users\Mohammed\Pictures\Tarzi-Backend\bin\Debug\net5.0\System.Web.WebPages.Deployment.dll
-C:\Users\Mohammed\Pictures\Tarzi-Backend\bin\Debug\net5.0\System.Web.WebPages.Razor.dll
-C:\Users\Mohammed\Pictures\Tarzi-Backend\bin\Debug\net5.0\System.Web.WebPages.dll
-C:\Users\Mohammed\Pictures\Tarzi-Backend\bin\Debug\net5.0\Microsoft.Web.Infrastructure.dll
 C:\Users\Mohammed\Pictures\Tarzi-Backend\obj\Debug\net5.0\Razor\Views\Customer\AddOrder.cshtml.g.cs
+C:\Users\Mohammed\Pictures\Tarzi-Backend\bin\Debug\net5.0\System.Net.Http.Formatting.dll
+C:\Users\Mohammed\Pictures\Tarzi-Backend\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.WebApiCompatShim.dll

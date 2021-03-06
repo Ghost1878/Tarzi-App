@@ -34,21 +34,21 @@ namespace Tarzi_Backend.Controllers
 
         [Route("customer/order-form")]
         [HttpGet]
-        public async Task<IActionResult> AddOrder(int? id)
-        {
-            //Customer = new Customer();
-            //if (id == null)
-            //{
-            //    return View(Customer);
-            //}
-            ////int cusId = Convert.ToInt32(id);
-            //Customer = await _repo.GetById((int)id);
-            //if (Customer == null)
-            //{
-            //    return NotFound();
-            //}
-            return View();
-        }
+        //public async Task<IActionResult> AddOrder(int? id)
+        //{
+        //    //Customer = new Customer();
+        //    //if (id == null)
+        //    //{
+        //    //    return View(Customer);
+        //    //}
+        //    ////int cusId = Convert.ToInt32(id);
+        //    //Customer = await _repo.GetById((int)id);
+        //    //if (Customer == null)
+        //    //{
+        //    //    return NotFound();
+        //    //}
+        //    return View();
+        //}
         [Route("customer/customer-form")]
         [HttpGet]
         public async Task<IActionResult> CustomerForm(int? id)

@@ -18,8 +18,8 @@ namespace Tarzi_Backend.Models
 
         public string Email { get; set; }
 
-        public List<Order> Orders { get; set; }
-        [DisplayFormat(DataFormatString ="{0:yyyy-MM-ddTHH:mm}",ApplyFormatInEditMode =true)]
+        public virtual ICollection<Order> Orders { get; set; }
+        //[DisplayFormat(DataFormatString ="{0:yyyy-MM-ddTHH:mm}",ApplyFormatInEditMode =true)]
         public DateTimeOffset? CreatedAt { get; set; } = DateTime.Now;
     }
 }

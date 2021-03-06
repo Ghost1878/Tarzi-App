@@ -1,8 +1,26 @@
-﻿
-
-
-
-
+﻿ $(document).ready(function () {
+   // toastr.error("test","testset");
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-bottom-left",
+        "preventDuplicates": false, 
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showDuration": "300",
+        "showEasing": "swing",
+        "showMethod": "fadeIn",
+        "hideDuration": "600",
+       // "hideEasing": "easeInBack",//"slideUp", //"linear",
+        "hideMethod": "fadeOut",
+      'tapToDismiss': false,
+        "closeEasing ":"slideUp",
+      "rtl": true,
+      
+      }
+});
 
 
 // $(document).ready(function () {

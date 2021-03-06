@@ -13,6 +13,7 @@
     <link href="~/lib/font-awesome/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/lib/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <link href="~/css/toastr.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -28,21 +29,21 @@
                     <nav class="navbar navbar-expand   bg-primary py-1">
                         <h4 class="dashboard">
                             <a style="text-decoration: none; color:#fff  !important" asp-action="Index"
-                               asp-controller="Account">
+                                asp-controller="Account">
                                 لـوحــة
                                 التحــكم
                             </a>
                         </h4>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
-                                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
 
 
                         <div class="dropdown show">
                             <a class="nav-link dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown"
-                               style="color: #fff !important;">إدارة العملاء</a>
+                                style="color: #fff !important;">إدارة العملاء</a>
                             <ul class="dropdown-menu text-right" aria-labelledby="dropdownMenuLink">
                                 <li>
                                     <a class="dropdown-item" asp-action="Index" asp-controller="Customer">كل العملاء</a>
@@ -64,7 +65,7 @@
 
                         <div class="dropdown show">
                             <a class="nav-link dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown"
-                               style="color: #fff !important;">إدارة الطلـــبات</a>
+                                style="color: #fff !important;">إدارة الطلـــبات</a>
                             <ul class="dropdown-menu text-right" aria-labelledby="dropdownMenuLink">
                                 <li>
                                     <a class="dropdown-item" asp-action="Index" asp-controller="Order">كل الطلـــبات</a>
@@ -77,7 +78,7 @@
 
                         <div class="dropdown show ">
                             <a class="nav-link dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown"
-                               style="color: #fff !important;">إدارة الأصناف</a>
+                                style="color: #fff !important;">إدارة الأصناف</a>
                             <ul class="dropdown-menu text-right" aria-labelledby="dropdownMenuLink">
                                 <li>
                                     <a class="dropdown-item" asp-action="Index" asp-controller="Categories">كل الأصناف</a>
@@ -89,7 +90,7 @@
                         </div>
                         <div class="dropdown show">
                             <a class="nav-link dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown"
-                               style="color: #fff !important;">إدارة الأقمـشة</a>
+                                style="color: #fff !important;">إدارة الأقمـشة</a>
                             <ul class="dropdown-menu text-right" aria-labelledby="dropdownMenuLink">
                                 <li>
                                     <a class="dropdown-item" asp-action="Index" asp-controller="Draperies">كل الأقمـشة</a>
@@ -105,8 +106,8 @@
                             <ul class="navbar-nav mr-auto">
                                 <li class="nav-item btn-group" role="group">
                                     <a id="btnGroupDrop1" title="Manage" data-toggle="dropdown" aria-haspopup="true"
-                                       aria-expanded="false"
-                                       class=" dropdown-toggle nav-link b-primary">@User.Identity.Name</a>
+                                        aria-expanded="false"
+                                        class=" dropdown-toggle nav-link b-primary">@User.Identity.Name</a>
                                     <ul class="dropdown-menu text-center " aria-labelledby="btnGroupDrop1">
                                         <li class="mav-item">
                                             <a class="nav-link" asp-action="Index" asp-controller="Account">
@@ -157,7 +158,8 @@
     <script src="~/lib/font-awesome/js/fontawesome.min.js"></script>
     <script src="~/lib/font-awesome/js/all.min.js"></script>
     <script src="~/lib/humanize-plus/humanize.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script> 
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/toastr.min.js"></script>
     <script src="~/lib/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
     <script src="~/lib/bootbox.js/bootbox.min.js"></script>
     @RenderSection("Scripts", required: false)
