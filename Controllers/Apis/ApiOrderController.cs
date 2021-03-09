@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NToastNotify;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +10,12 @@ namespace Tarzi_Backend.Controllers.Apis
 {
     public class ApiOrderController : Controller
     {
-        private readonly IToastNotification _toast;
+
         private readonly OrderService _orderService;
 
-        public ApiOrderController(OrderService orderService, IToastNotification toast)
+        public ApiOrderController(OrderService orderService)
         {
-            _toast = toast;
+
             _orderService = orderService;
         }
         [HttpDelete("{id}")]
@@ -26,7 +26,6 @@ namespace Tarzi_Backend.Controllers.Apis
                 var uId = Convert.ToInt32(id);
                 await _orderService.Delete(uId);
 
-                _toast.AddSuccessToastMessage("deleted success");
             }
             catch (System.Exception)
             {

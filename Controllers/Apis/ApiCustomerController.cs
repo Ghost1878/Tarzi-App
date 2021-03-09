@@ -2,23 +2,21 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NToastNotify;
 using Tarzi_Backend.Data.Services;
 
 namespace Tarzi_Backend.Controllers.Apis
 {
     [ApiController]
     [Route("/api/[controller]")]
-   // [Authorize]
+    // [Authorize]
     public class ApiCustomerController : ControllerBase
     {
-        private readonly IToastNotification _toast;
-        private readonly CustomerService _customerService; 
 
-        public ApiCustomerController(CustomerService customerService , IToastNotification toast)
+        private readonly CustomerService _customerService;
+
+        public ApiCustomerController(CustomerService customerService)
         {
-            _toast = toast;
-            _customerService = customerService; 
+            _customerService = customerService;
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
@@ -27,8 +25,6 @@ namespace Tarzi_Backend.Controllers.Apis
             {
                 var uId = Convert.ToInt32(id);
                 await _customerService.Delete(uId);
-
-                _toast.AddSuccessToastMessage("deleted success");
             }
             catch (System.Exception)
             {

@@ -1,10 +1,6 @@
-using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using NToastNotify;
-using Tarzi_Backend.Data.Repos;
 using Tarzi_Backend.Data.Services;
 using Tarzi_Backend.Models;
 
@@ -15,19 +11,17 @@ namespace Tarzi_Backend.Controllers
     public class CustomerController : Controller
     {
         private readonly CustomerService _repo;
-        private readonly IToastNotification _toast;
 
         [BindProperty]
         public Customer Customer { get; set; }
 
-        public CustomerController(CustomerService repo, IToastNotification toast)
+        public CustomerController(CustomerService repo)
         {
             _repo = repo;
-            _toast = toast;
+
         }
         public async Task<IActionResult> Index()
         {
-            _toast.AddSuccessToastMessage("is succuess");
             var customers = await _repo.GetAll();
             return View(customers);
         }
@@ -82,12 +76,13 @@ namespace Tarzi_Backend.Controllers
                 if (Customer.Id == 0)
                 {
                     await _repo.Add(Customer);
-                    return RedirectToAction(nameof(Index));
+                    TempData["message"] = "تم إضافة العميل بنجاح";
                 }
                 else
                 {
                     await _repo.Update(Customer);
-                    return RedirectToAction(nameof(Index));
+                    TempData["message"] = "تم تعديل بيانات العميل بنجاح!";
+
                 }
             }
             return RedirectToAction(nameof(Index));

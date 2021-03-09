@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NToastNotify;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +12,11 @@ namespace Tarzi_Backend.Controllers.Apis
 
     public class ApiCategoryController : Controller
     {
-        private readonly IToastNotification _toast;
-        private readonly CategoryService _categoryService; 
 
-        public ApiCategoryController(CategoryService categoryService, IToastNotification toast)
+        private readonly CategoryService _categoryService;
+
+        public ApiCategoryController(CategoryService categoryService)
         {
-            _toast = toast;
             _categoryService = categoryService;
         }
         [HttpDelete("{id}")]
@@ -28,14 +26,13 @@ namespace Tarzi_Backend.Controllers.Apis
             {
                 var uId = Convert.ToInt32(id);
                 await _categoryService.Delete(uId);
-
-                _toast.AddSuccessToastMessage("deleted success");
             }
             catch (System.Exception)
             {
 
                 throw;
             }
+            // TempData["message"] = "تم حذف الصنف بنجاح";
             return Ok();
         }
     }

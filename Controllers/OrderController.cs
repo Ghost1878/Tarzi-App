@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Tarzi_Backend.Data.Services;
@@ -16,20 +18,24 @@ namespace Tarzi_Backend.Controllers
         private readonly OrderService _orderService;
         private readonly CategoryService _categoryService;
         private readonly CustomerService _customerService;
+        private readonly OrderDetailsService _orderDetailsService;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
         [BindProperty]
         public CustomerOrderViewModel CustomerOrder { get; set; }
         public SelectList CustomersList { get; set; }
-        public OrderController(CategoryService categoryService, OrderService orderService, CustomerService customerService)
+        public OrderController(SignInManager<ApplicationUser> signInManager, CategoryService categoryService, OrderDetailsService orderDetailsService, OrderService orderService, CustomerService customerService)
         {
             _orderService = orderService;
             _categoryService = categoryService;
             _customerService = customerService;
+            _orderDetailsService = orderDetailsService;
+            _signInManager = signInManager;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
-            // var orders = await _orderService.GetAll();
-            return View();
+            var orders = await _orderService.GetAll();
+            return View(orders);
         }
         [HttpGet]
         [Route("create-order")]
@@ -47,7 +53,7 @@ namespace Tarzi_Backend.Controllers
         [Route("create-order")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(CustomerOrderViewModel model)
+        public async Task<IActionResult> CreateAsync(CustomerOrderViewModel model)
         {
 
             double tot = model.TotalAmount;
@@ -59,9 +65,14 @@ namespace Tarzi_Backend.Controllers
                 {
                     CategoryId = model.CategoryId,
                     ReceiptDate = model.ReceiptDate,
-                    OrderDetailsId = model.OrderDetailsId,
                     CustomerId = model.CustomerId,
+                    OrderDetailsId = model.Id,
+                    AddedByUser = _signInManager.UserManager.GetUserId(User),
+                    ModifiedAt = DateTime.Now
+
                 };
+                await _orderService.Add(order);
+
                 OrderDetails orderDetails = new OrderDetails
                 {
                     CustomerName = model.FullName,
@@ -80,10 +91,17 @@ namespace Tarzi_Backend.Controllers
                     DraperyFrom = model.DraperyFrom,
                     CreatedAt = model.CreatedAt,
                     ReceiptDate = model.ReceiptDate,
-                    OrderId = model.OrderId
+                    CustomerType = model.CustomerType,
+                    OrderId = order.Id,
+
+                    AddedByUser = _signInManager.UserManager.GetUserId(User),
+                    ModifiedAt = DateTime.Now
                 };
-            }
-            return View();
+
+                await _orderDetailsService.Add(orderDetails);
+            };
+            TempData["message"] = "تم إضافة الطلب بنجاح!";
+            return View(nameof(IndexAsync));
         }
     }
 }

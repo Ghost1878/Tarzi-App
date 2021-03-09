@@ -9,7 +9,7 @@
         "preventDuplicates": false, 
         "timeOut": "5000",
         "extendedTimeOut": "1000",
-        "showDuration": "300",
+        "showDuration": "200",
         "showEasing": "swing",
         "showMethod": "fadeIn",
         "hideDuration": "600",

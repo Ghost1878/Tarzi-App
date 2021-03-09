@@ -4,6 +4,7 @@ namespace Tarzi_Backend.Models
 {
     public class DraperiesType
     {
+        [Key]
         public int Id { get; set; }
         [Required]
         [Display(Name = "اسم القماش")]

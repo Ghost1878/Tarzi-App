@@ -4,8 +4,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Tarzi_Backend.Models
 {
-    public class Customer
+    public class Customer : Shared
     {
+        [Key]
         public int Id { get; set; }
 
         [Required]
@@ -19,7 +20,6 @@ namespace Tarzi_Backend.Models
         public string Email { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }
-        //[DisplayFormat(DataFormatString ="{0:yyyy-MM-ddTHH:mm}",ApplyFormatInEditMode =true)]
-        public DateTimeOffset? CreatedAt { get; set; } = DateTime.Now;
+        //[DisplayFormat(DataFormatString ="{0:yyyy-MM-ddTHH:mm}",ApplyFormatInEditMode =true)]  
     }
 }

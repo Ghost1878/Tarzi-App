@@ -54,7 +54,6 @@ namespace Tarzi_Backend.Controllers
                     {
                         await _categoryService.Add(Category);
                         TempData["message"] = "تم حفظ الصنف";
-                        TempData["title"] = " حفظ الصنف";
                         return RedirectToAction(nameof(Index));
                     }
                     else

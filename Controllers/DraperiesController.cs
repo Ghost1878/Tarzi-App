@@ -59,11 +59,13 @@ namespace Tarzi_Backend.Controllers
                     if (DraperiesType.Id == 0)
                     {
                         await _draperiesService.Add(DraperiesType);
+                        TempData["message"] = "تمت إضافة القماش للمخزن بنجاح!";
+                        //   return RedirectToAction(nameof(Index));
                     }
                     else
                     {
                         await _draperiesService.Update(DraperiesType);
-
+                        TempData["message"] = "تم تعديل بيانات القماش بنجاح!";
                     }
                 }
             }

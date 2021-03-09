@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,12 +9,16 @@ namespace Tarzi_Backend.Models
 {
     public class OrderDetails : Shared
     {
+        [Key]
         public int Id { get; set; }
+
         public int OrderId { get; set; }
         [ForeignKey("OrderId")]
         public Order Order { get; set; }
+        [Required]
         public DateTime ReceiptDate { get; set; }
 
+        [Required]
         public int Quantity { get; set; }
         public double UnitPrice { get; set; }
         public double TotalAmount { get; set; }
@@ -36,5 +41,6 @@ namespace Tarzi_Backend.Models
         /********* customer details ********/
         public string CustomerName { get; set; }
         public string Phone { get; set; }
+        public string CustomerType { get; set; }
     }
 }

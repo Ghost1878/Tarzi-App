@@ -22,10 +22,10 @@ namespace Tarzi_Backend.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            // builder.Entity<Order>()
-            //     .HasOne(o => o.OrderDetails)
-            //     .WithOne(o => o.Order)
-            //     .HasForeignKey<OrderDetails>(o => o.OrderDetailsId);
+            //  builder.Entity<Order>()
+            // .HasOne(o => o.OrderDetailsId)
+            // .WithOne(o => o.Order)
+            // .HasForeignKey<OrderDetails>(o => o.OrderId);
             //builder.Entity<Order>()
             //.HasOne(b => b.Measure)
             //.WithOne(i => i.Order)

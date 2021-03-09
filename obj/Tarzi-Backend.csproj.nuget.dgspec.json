@@ -88,10 +88,6 @@
               "target": "Package",
               "version": "[5.0.1, )"
             },
-            "NToastNotify": {
-              "target": "Package",
-              "version": "[7.0.0, )"
-            },
             "bootstrap": {
               "target": "Package",
               "version": "[4.6.0, )"

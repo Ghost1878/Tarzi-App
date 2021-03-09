@@ -90,10 +90,10 @@
                                     url: Url,
                                     method: 'DELETE',
                                     success: function () {
-                                        alert('تم حذف العميل بنجاح!')
+                                        toastr.error('تم حذف العميل بنجاح!')
                                     },
                                     error: function () {
-                                        alert('خطأ اثناء عملية الحذف')
+                                        toastr.warning('خطأ اثناء عملية الحذف')
                                     }
 
                                 });

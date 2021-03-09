@@ -13550,23 +13550,6 @@
         }
       },
       {
-        "HashCode": 1130864009,
-        "Kind": "MVC.ViewComponent",
-        "Name": "__Generated__NToastNotifyViewComponentTagHelper",
-        "AssemblyName": "NToastNotify",
-        "CaseSensitive": false,
-        "TagMatchingRules": [
-          {
-            "TagName": "vc:n-toast-notify"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "ITagHelper",
-          "Common.TypeName": "__Generated__NToastNotifyViewComponentTagHelper",
-          "MVC.ViewComponent.Name": "NToastNotify"
-        }
-      },
-      {
         "HashCode": 1912741130,
         "Kind": "Components.Bind",
         "Name": "Bind",

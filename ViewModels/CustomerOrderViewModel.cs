@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Tarzi_Backend.Models;
 
@@ -12,13 +13,13 @@ namespace Tarzi_Backend.ViewModels
         public int Id { get; set; }
 
 
-        public int CustomerId { get; set; }
+        public int CustomerId { get; set; } = 0;
         public string CustomerPhone { get; set; }
         public string FullName { get; set; }
         public Customer Customer { get; set; }
         public List<Customer> Customers { get; set; }
-        public string CustomerType { get; set; } = "عميل مسجل";
-        public string[] CustomerTypes = new[] { "عميل مسجل", "زبون" };
+        public string CustomerType { get; set; } = "عميل";
+        // public string[] CustomerTypes = new[] { "عميل مسجل", "زبون" };
 
 
         public int CategoryId { get; set; }
@@ -28,6 +29,7 @@ namespace Tarzi_Backend.ViewModels
 
 
         public int OrderId { get; set; }
+        [Required]
         public int Quntity { get; set; }
         public double UnitPrice { get; set; }
         public double TotalAmount { get; set; }
@@ -51,6 +53,7 @@ namespace Tarzi_Backend.ViewModels
         public int OrderDetailsId { get; set; }
         public string DraperyFrom { get; set; }
         public int DarperyNeededLength { get; set; }
+
     }
 
 

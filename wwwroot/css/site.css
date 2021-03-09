@@ -543,6 +543,7 @@ header {
 }
 #toast-container > div {
 	height: 80px !important;
+	width: 400px !important;
 }
 .toast-title {
 	text-align: center !important;
@@ -551,7 +552,7 @@ header {
 }
 .toast-message {
 	text-align: right !important;
-	font-size: 1.2em !important;
+	font-size: 1em !important;
 	font-weight: bolder;
 	line-height: 3 !important;
 }

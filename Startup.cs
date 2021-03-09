@@ -29,6 +29,7 @@ namespace Tarzi_Backend
             services.AddScoped<CategoryService>();
             services.AddScoped<DraperiesService>();
             services.AddScoped<OrderService>();
+            services.AddScoped<OrderDetailsService>();
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
             services.AddMvc().AddRazorRuntimeCompilation();
@@ -42,18 +43,7 @@ namespace Tarzi_Backend
                 });
             // services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //     .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddControllersWithViews().AddNToastNotifyNoty(new NToastNotify.NotyOptions()
-            {
-                ProgressBar = true,
-                Timeout = 3500,
-                Theme = "mint"
-            });
-            // services.AddMvc().AddNToastNotifyToastr(new ToastrOptions()
-            // {
-            //     ProgressBar = false,
-            //     TimeOut = 2500,
-            //     PositionClass = ToastPositions.TopLeft
-            // });
+
         }
 
 
@@ -61,7 +51,7 @@ namespace Tarzi_Backend
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
-            app.UseNToastNotify();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

@@ -16,11 +16,11 @@
             <form asp-action="Create" method="POST" autocomplete="off">
                 <label>نوع العميل</label>
                 <div class="form-group border p-2" id="radios">
-                    @foreach (var customer in Model.CustomerTypes)
+                    @foreach (var customer in Html.GetEnumSelectList<CustomerTypes>())
                     {
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
-                                <input name='CustomerType' value="@customer" asp-for="CustomerType" type="radio" class="form-check-input"> @customer
+                                <input name='CustomerType' value="@customer.Text" asp-for="CustomerType" type="radio" class="form-check-input" > @customer.Text
                             </label>
                         </div>
                     }
@@ -47,13 +47,13 @@
                         <select asp-for="CustomerId" class="custom-select" asp-items="@(new SelectList(Model.Customers,"Id","Name"))">
                             <option value="" selected disabled>أختار اسم العميل</option>
                         </select>
+                        <span asp-validation-for="CustomerId" class="text-danger"></span>
                     </div>
 
                     <div class="form-group col">
                         <label asp-for="CategoryId">نوع الجلابية</label>
                         <select asp-for="CategoryId" class="custom-select" asp-items="@(new SelectList(Model.Categories,"Id","Name"))">
-                            <option selected disabled>اختار نوع الجلابية</option>
-
+                            <option selected disabled>اختار نوع الجلابية</option> 
                         </select>
                         <span asp-validation-for="CategoryId" class="text-danger"></span>
                     </div>
@@ -115,11 +115,11 @@
                     </div>
                 </div>
                 
-                    <div class="form-group col-2 mt-3">
-                        <input type="checkbox" asp-for="DraperyFrom" value="DraperyFrom" id="DraperyFrom" />
+                    <div class="form-row">
+                    <div class="form-group col mt-3">
+                        <input type="checkbox" asp-for="DraperyFrom"  id="DraperyFrom" />
                         <label>القماش من المحل</label>
                     </div>
-                    <div class="form-row">
                     <div class="form-group col" id="textboxDraperyLength" style="display:none">
                         <label>طول القماش المطلوب    </label>
                         <input type="text" name="DarperyNeededLength" asp-for="DarperyNeededLength" class="form-control">
@@ -154,7 +154,7 @@
             var radios = $('[name="CustomerType"]:radio'); 
            
             radios.on("change", function () {
-                if (checkedRadio == "عميل مسجل") {
+                if (checkedRadio == "عميل") {
                     $("#JointApplicantInfo").toggle();
                     $("#RegisteredCustomer").toggle();
                 }
@@ -186,7 +186,7 @@ $("#RemanentMonay").val(RemanentMonay);
         $('#datepicker').datepicker({
             format: "yyyy-mm-dd",
             autoclose: true,
-            rtl: true 
+            rtl: true , 
         });                 
     </script>
 
