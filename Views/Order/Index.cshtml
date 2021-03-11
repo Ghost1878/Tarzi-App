@@ -15,12 +15,12 @@
         </div>
     </div>
     <div class="row">
-        <div id="message">@TempData["message"]</div>
+        <div id="message" class="d-none">@TempData["message"]</div>
     </div>
 
     <div class="row m-2">
-         @if (Model.Count() > 0)
-        {
+         @* @if (Model.Count() > 0)
+        { *@
             <table class="table d-table table-striped table-sm border">
                 <thead class="bg-primary text-white text-center py-3">
                     <tr>
@@ -32,13 +32,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var field in Model)
+                    @* @foreach (var field in Model)
                     {
                         <tr>
                             <td><i class="fa fa-user"></i> @field.FullName</td>
                             <td>@field.Category</td>
                             <td>@field.CustomerPhone</td>
-                            <td>@field.CreatedAt  </td>
+                            <td>@field.CreatedAt</td>
+                            <td>  </td>
                             <td>
                                 <a class="btn b-default p-1" asp-action="CustomerForm" title="تعديل بيانات العميل ..." asp-route-id="@field.Id">
                                     <i class="fa fa-pencil-alt" aria-hidden="true"></i>
@@ -51,16 +52,16 @@
                                 </a>
                             </td>
                         </tr>
-                    }
+                    } *@
                 </tbody>
             </table>
-        }
+        @* }
         else
         {
     <h2 class="mx-auto"> 
         قائمة العملاء فارغة 
     </h2>
-        }
+        } *@
     </div>
     </div>
 @section Scripts{

@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Tarzi_Backend.Data.Services;
 using Tarzi_Backend.Models;
+using X.PagedList;
+
 
 namespace Tarzi_Backend.Controllers
 {
@@ -20,14 +22,18 @@ namespace Tarzi_Backend.Controllers
             _repo = repo;
 
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? page)
         {
             var customers = await _repo.GetAll();
-            return View(customers);
+                
+            var pageNumber = page ?? 1;
+            int pageSize = 1; 
+            var onPageOfCustomer = customers.ToPagedList(pageNumber, pageSize); 
+            return View(onPageOfCustomer);
         }
 
-        [Route("customer/order-form")]
-        [HttpGet]
+        //[Route("customer/order-form")]
+        // [HttpGet]
         //public async Task<IActionResult> AddOrder(int? id)
         //{
         //    //Customer = new Customer();

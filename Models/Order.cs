@@ -16,8 +16,8 @@ namespace Tarzi_Backend.Models
         //  [ForeignKey("CategoryId")]
         public Category Category { get; set; }
 
-        public int CustomerId { get; set; }
-        // [ForeignKey("CustomerId")]
+        public int? CustomerId { get; set; }
+        [ForeignKey("CustomerId")]
         public virtual Customer Customer { get; set; }
 
         public DateTime ReceiptDate { get; set; }

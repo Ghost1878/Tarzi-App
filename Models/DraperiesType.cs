@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Tarzi_Backend.Models
 {
-    public class DraperiesType
+    public class DraperiesType : Shared
     {
         [Key]
         public int Id { get; set; }
@@ -14,7 +14,7 @@ namespace Tarzi_Backend.Models
         [Display(Name = " وصف القماش")]
         [MaxLength(300)]
         public string Description { get; set; }
-        [Display(Name = "  القماش المتوفر (متر)")]
+        [Display(Name = "القماش المتوفر (متر)")]
 
         public int AvailableLength { get; set; }
 

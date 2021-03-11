@@ -1,4 +1,6 @@
-@model IEnumerable<Customer>
+ @model IEnumerable<Customer> 
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
+    
 <div class="container-fluid m-2 py-2 card shadow">
     <div class="row">
         <div class="col-sm-6">
@@ -15,54 +17,68 @@
         </div>
     </div>
 <div class="row"><div class="d-none" id="message">@TempData["message"]</div></div>
-    <div class="row m-2">
-        @if (Model.Count() > 0)
+<div class="row m-2">
+     @if (Model.Count() > 0)
+        { 
+    <table class="table d-table table-striped table-sm border">
+        <thead class="bg-primary text-white text-center py-3">
+            <tr>
+                <th>إسم العميل</th>
+                <th>البريد الإلكتروني</th>
+                <th>رقم الهاتف</th>
+                <th>تاريخ الإضــافة</th>
+                <th>العمليــات</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in Model)
+            {
+                <tr>
+                    <td><i class="fa fa-user"></i> @customer.Name</td>
+                    <td>@customer.Email</td>
+                    <td>@customer.Phone</td>
+                    <td>@customer.CreatedAt.Humanize(culture: new CultureInfo("ar-AR"))</td>
+                    <td>
+                        <a class="btn b-default p-1" asp-action="CustomerForm" title="تعديل بيانات العميل ..." asp-route-id="@customer.Id">
+                            <i class="fa fa-pencil-alt" aria-hidden="true"></i>
+                            تعديل
+                        </a>
+                        <a href="javascript:;" data-id="@customer.Id" title="حذف العميل ..."
+                           class="btn border p-1 js-delete b-default">
+                            <i class=" fa fa-trash " style="color: #df3434;"></i>
+                            حذف
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }),
+   new PagedListRenderOptionsBase
         {
-            <table class="table d-table table-striped table-sm border">
-                <thead class="bg-primary text-white text-center py-3">
-                    <tr>
-                        <th>إسم العميل</th>
-                        <th>البريد الإلكتروني</th>
-                        <th>رقم الهاتف</th>
-                        <th>تاريخ الإضــافة</th>
-                        <th>العمليــات</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var customer in Model)
-                    {
-                        <tr>
-                            <td><i class="fa fa-user"></i> @customer.Name</td>
-                            <td>@customer.Email</td>
-                            <td>@customer.Phone</td>
-                            <td>@customer.CreatedAt  </td>
-                            <td>
-                                <a class="btn b-default p-1" asp-action="CustomerForm" title="تعديل بيانات العميل ..." asp-route-id="@customer.Id">
-                                    <i class="fa fa-pencil-alt" aria-hidden="true"></i>
-                                    تعديل
-                                </a>
-                                <a href="javascript:;" data-id="@customer.Id" title="حذف العميل ..."
-                                   class="btn border p-1 js-delete b-default">
-                                    <i class=" fa fa-trash " style="color: #df3434;"></i>
-                                    حذف
-                                </a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
+   ContainerDivClasses = new[] { "navigation" },
+   LiElementClasses = new[] { "page-item" },
+   PageClasses = new[] { "page-link" },
+   DisplayLinkToPreviousPage =PagedListDisplayMode.Always, 
+   
+   })
+
+     }
         else
-        {
-    <h2 class="mx-auto"> 
-        قائمة العملاء فارغة 
+        { 
+    <h2 class="mx-auto">
+        قائمة العملاء فارغة
     </h2>
-        }
-    </div>
+     } 
+</div>
 </div>
 @section Scripts{
     <script> 
         $(document).ready(function () {
+
+
+
+            $('ul.pagination > li.disabled > a').addClass('page-link');
 
             var message = $("#message").text();
                 if(message !==''){

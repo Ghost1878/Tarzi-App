@@ -33,7 +33,7 @@
                         <tr>
                             <td>@category.Name</td>
                             <td>@category.Description</td>
-                            <td>@category.CreatedAt</td>
+                            <td>@category.CreatedAt.Humanize(culture:new CultureInfo("ar-AR"))</td>
                             <td>
                                 <a class="btn b-default p-1" asp-action="Create" asp-route-id="@category.Id">
                                     <i class="fa fa-pencil-alt" aria-hidden="true"></i>

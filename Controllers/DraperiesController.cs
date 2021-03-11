@@ -6,7 +6,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Tarzi_Backend.Data.Services;
-using Tarzi_Backend.Models;
+using Tarzi_Backend.Models; 
+using System.Globalization;
+using Humanizer.Localisation.DateToOrdinalWords;
+using Humanizer;
 
 namespace Tarzi_Backend.Controllers
 {
@@ -24,6 +27,8 @@ namespace Tarzi_Backend.Controllers
         // GET: DraperiesController
         public async Task<ActionResult> Index()
         {
+          //  CultureInfo culture = new CultureInfo("ar-AR");
+           //  var date = DateTime.Now.AddDays(-2).Humanize(culture:culture);
             var DraperiesType = await _draperiesService.GetAll();
             return View(DraperiesType);
         }

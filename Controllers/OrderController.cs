@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Tarzi_Backend.Data.Services;
 using Tarzi_Backend.Models;
 using Tarzi_Backend.ViewModels;
-
 namespace Tarzi_Backend.Controllers
 {
     //[Authorize]
@@ -32,10 +31,10 @@ namespace Tarzi_Backend.Controllers
             _orderDetailsService = orderDetailsService;
             _signInManager = signInManager;
         }
-        public async Task<IActionResult> IndexAsync()
+        public IActionResult Index()
         {
-            var orders = await _orderService.GetAll();
-            return View(orders);
+
+            return View();
         }
         [HttpGet]
         [Route("create-order")]
@@ -66,7 +65,7 @@ namespace Tarzi_Backend.Controllers
                     CategoryId = model.CategoryId,
                     ReceiptDate = model.ReceiptDate,
                     CustomerId = model.CustomerId,
-                    OrderDetailsId = model.Id,
+                    //OrderDetailsId = model.Id,
                     AddedByUser = _signInManager.UserManager.GetUserId(User),
                     ModifiedAt = DateTime.Now
 
@@ -101,7 +100,7 @@ namespace Tarzi_Backend.Controllers
                 await _orderDetailsService.Add(orderDetails);
             };
             TempData["message"] = "تم إضافة الطلب بنجاح!";
-            return View(nameof(IndexAsync));
+            return View(nameof(Index));
         }
     }
 }

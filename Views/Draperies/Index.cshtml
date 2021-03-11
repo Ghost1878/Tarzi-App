@@ -22,7 +22,7 @@
                 <thead class="bg-primary text-white py-3">
                     <tr>
                         <th>اسم القماش</th>
-                        <th>الوصف</th>
+                        <th>الوصف</th> 
                         <th>الكمية المتوفرة (متر)</th>
                         <th>العمــليات</th>
                     </tr>
@@ -34,6 +34,7 @@
                             <td>@drapery.DraperyName</td>
                             <td>@drapery.Description</td>
                             <td>@drapery.AvailableLength <small>متر</small></td>
+                            <td>@drapery.CreatedAt.Humanize(culture: new CultureInfo("ar-AR"))</td> 
                             <td>
                                 <a asp-action="Create" asp-route-id="@drapery.Id" class="btn b-default p-1 ">
                                     <i class="fa fa-pencil-alt" aria-hidden="true"></i>
