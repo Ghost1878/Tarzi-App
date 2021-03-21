@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using Newtonsoft.Json;
 namespace Tarzi_Backend.Helpers
 {
     public class NotificationHelper

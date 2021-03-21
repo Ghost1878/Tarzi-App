@@ -1,5 +1,3 @@
-using System;
-
 namespace Tarzi_Backend.Models
 {
     public class ErrorViewModel

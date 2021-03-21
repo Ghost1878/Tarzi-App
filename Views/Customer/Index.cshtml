@@ -23,8 +23,7 @@
     <table class="table d-table table-striped table-sm border">
         <thead class="bg-primary text-white text-center py-3">
             <tr>
-                <th>إسم العميل</th>
-                <th>البريد الإلكتروني</th>
+                <th>إسم العميل</th> 
                 <th>رقم الهاتف</th>
                 <th>تاريخ الإضــافة</th>
                 <th>العمليــات</th>
@@ -34,16 +33,15 @@
             @foreach (var customer in Model)
             {
                 <tr>
-                    <td><i class="fa fa-user"></i> @customer.Name</td>
-                    <td>@customer.Email</td>
+                    <td><i class="fa fa-user"></i> @customer.Name</td> 
                     <td>@customer.Phone</td>
                     <td>@customer.CreatedAt.Humanize(culture: new CultureInfo("ar-AR"))</td>
                     <td>
-                        <a class="btn b-default p-1" asp-action="CustomerForm" title="تعديل بيانات العميل ..." asp-route-id="@customer.Id">
+                        <a class="btn b-default p-1" asp-action="CustomerForm" title="تعديل بيانات العميل ..." asp-route-id="@customer.CustomerId">
                             <i class="fa fa-pencil-alt" aria-hidden="true"></i>
                             تعديل
                         </a>
-                        <a href="javascript:;" data-id="@customer.Id" title="حذف العميل ..."
+                        <a href="javascript:;" data-id="@customer.CustomerId" title="حذف العميل ..."
                            class="btn border p-1 js-delete b-default">
                             <i class=" fa fa-trash " style="color: #df3434;"></i>
                             حذف
@@ -53,15 +51,15 @@
             }
         </tbody>
     </table>
-    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }),
-   new PagedListRenderOptionsBase
-        {
-   ContainerDivClasses = new[] { "navigation" },
-   LiElementClasses = new[] { "page-item" },
-   PageClasses = new[] { "page-link" },
-   DisplayLinkToPreviousPage =PagedListDisplayMode.Always, 
-   
-   })
+        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }),
+    new PagedListRenderOptionsBase
+            {
+    ContainerDivClasses = new[] { "navigation" },
+    LiElementClasses = new[] { "page-item" },
+    PageClasses = new[] { "page-link" },
+    DisplayLinkToPreviousPage =PagedListDisplayMode.Always, 
+    
+    })
 
      }
         else
@@ -82,7 +80,7 @@
 
             var message = $("#message").text();
                 if(message !==''){
-                    toastr.info(message);
+                    toastr.success(message);
                 }
 
             $('.js-delete').on('click', function () {

@@ -42,9 +42,9 @@
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group col" id="RegisteredCustomer">
+                    <div class="form-group col " id="RegisteredCustomer">
                         <label asp-for="CustomerId"> العملاء </label>
-                        <select asp-for="CustomerId" class="custom-select" asp-items="@(new SelectList(Model.Customers,"Id","Name"))">
+                        <select asp-for="CustomerId" class="custom-select" asp-items="@(new SelectList(Model.Customers,"CustomerId","Name"))">
                             <option value="" selected disabled>أختار اسم العميل</option>
                         </select>
                         <span asp-validation-for="CustomerId" class="text-danger"></span>

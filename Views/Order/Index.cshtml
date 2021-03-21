@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CustomerOrderViewModel>
+﻿@model IEnumerable<Order>
 <div class="container-fluid m-2 py-2 card shadow">
     <div class="row">
         <div class="col-sm-6">
@@ -19,49 +19,77 @@
     </div>
 
     <div class="row m-2">
-         @* @if (Model.Count() > 0)
-        { *@
+        @if (Model !=null)
+        {
             <table class="table d-table table-striped table-sm border">
                 <thead class="bg-primary text-white text-center py-3">
                     <tr>
                         <th>إسم العميل</th>
-                        <th>البريد الإلكتروني</th>
-                        <th>رقم الهاتف</th>
-                        <th>تاريخ الإضــافة</th>
+                        <th> رقم الهاتف</th>
+                        <th>نوع العميل</th>
+                        <th> الكمية</th>
+                        <th> اجمالي السعر</th>
+                        <th> المبلغ المدفوع</th>
+                        <th> المبلغ المتبقي</th>
+                        <th>تاريخ التسليم</th>
                         <th>العمليــات</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @* @foreach (var field in Model)
+                    @foreach (var item in Model)
                     {
                         <tr>
-                            <td><i class="fa fa-user"></i> @field.FullName</td>
-                            <td>@field.Category</td>
-                            <td>@field.CustomerPhone</td>
-                            <td>@field.CreatedAt</td>
-                            <td>  </td>
+
                             <td>
-                                <a class="btn b-default p-1" asp-action="CustomerForm" title="تعديل بيانات العميل ..." asp-route-id="@field.Id">
-                                    <i class="fa fa-pencil-alt" aria-hidden="true"></i>
-                                    تعديل
-                                </a>
-                                <a href="javascript:;" data-id="@field.Id" title="حذف العميل ..."
-                                   class="btn border p-1 js-delete b-default">
-                                    <i class=" fa fa-trash " style="color: #df3434;"></i>
-                                    حذف
-                                </a>
+                                @if (item.Customer == null)
+                                {
+
+                                    @item.OrderDetails.CustomerName
+                                }
+                                else
+                                {
+
+                                    @item.Customer.Name
+                                }
                             </td>
+                            <td>
+                                @if (item.Customer == null)
+                                {
+
+                                    @item.OrderDetails.Phone
+                                }
+                                else
+                                {
+
+                                    @item.Customer.Phone
+                                }
+                            </td>
+                            <td>@item.OrderDetails.CustomerType</td>
+                            <td>@item.OrderDetails.Quantity</td>
+                            <td><b>@item.OrderDetails.TotalAmount جنية</b></td>
+                            <td><b>@item.OrderDetails.ReceiptMonay جنية</b></td>
+                            <td><b>@item.OrderDetails.RemanentMonay جنية</b></td>
+                            <td>@item.OrderDetails.ReceiptDate.Humanize(culture: new CultureInfo("ar-AR"))</td>
+
+                            <td><a asp-action="OrderDetails" asp-route-id="@item.Id">تفاصيل الطلب </a></td>
                         </tr>
-                    } *@
+                    }
                 </tbody>
             </table>
-        @* }
+            @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }), new PagedListRenderOptionsBase
+            {
+               ContainerDivClasses = new[] { "navigation" },
+               LiElementClasses = new[] { "page-item" },
+               PageClasses = new[] { "page-link" },
+           })
+
+        }
         else
         {
-    <h2 class="mx-auto"> 
-        قائمة العملاء فارغة 
-    </h2>
-        } *@
+            <h2 class="mx-auto">
+                قائمة العملاء فارغة
+            </h2>
+        }
     </div>
     </div>
 @section Scripts{

@@ -20,89 +20,74 @@
 <body>
     <div class="container-fluid text-right">
         <div class="row">
-
-            @* @if (User.Identity.IsAuthenticated) *@
             @if (SignInManager.IsSignedIn(User))
             {
-
-                <div class="col-md-12 p-0">
-
-                    <nav class="navbar navbar-expand   bg-primary py-1">
-                        <h4 class="dashboard">
-                            <a style="text-decoration: none; color:#fff  !important" asp-action="Index"
-                                asp-controller="Account">
-                                لـوحــة
-                                التحــكم
-                            </a>
-                        </h4>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-
-
-                        <div class="dropdown show">
-                            <a class="nav-link dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown"
-                                style="color: #fff !important;">إدارة العملاء</a>
-                            <ul class="dropdown-menu text-right" aria-labelledby="dropdownMenuLink">
-                                <li>
+                <nav class="navbar navbar-expand-md bg-primary py-1 col-md-12 ">
+                    <h4 class="dashboard">
+                        <a style="text-decoration: none; color:#fff  !important" asp-action="Index"
+                            asp-controller="Account">
+                            لـوحــة
+                            التحــكم
+                        </a>
+                    </h4>
+                    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"
+                        data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="collapsibleNavId">
+                        <ul class="navbar-nav ml-auto mr-5 mt-lg-0">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="dropdownId" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" style="color: #fff !important;">إدارة
+                                    العملاء</a>
+                                <div class="dropdown-menu text-center" aria-labelledby="dropdownId">
                                     <a class="dropdown-item" asp-action="Index" asp-controller="Customer">كل العملاء</a>
-                                </li>
-                                <li>
                                     <a class="dropdown-item" asp-action="CustomerForm" asp-controller="Customer">
                                         إضافة
                                         عميل
                                     </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" asp-action="AddOrder" asp-controller="Customer">
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="dropdownId" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" style="color: #fff !important;">إدارة
+                                    الاصناف</a>
+                                <div class="dropdown-menu text-center" aria-labelledby="dropdownId">
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="Categories">كل الاصناف</a>
+                                    <a class="dropdown-item" asp-action="Create" asp-controller="Categories">
+                                        إضافة
+                                        صنف
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="dropdownId" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" style="color: #fff !important;"> إدارة
+                                    الطلـــبات
+                                </a>
+                                <div class="dropdown-menu text-center" aria-labelledby="dropdownId">
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="Order">كل الطلـــبات</a>
+                                    <a class="dropdown-item" asp-action="Create" asp-controller="Order">
                                         إضافة
                                         طلب
                                     </a>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="dropdown show">
-                            <a class="nav-link dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown"
-                                style="color: #fff !important;">إدارة الطلـــبات</a>
-                            <ul class="dropdown-menu text-right" aria-labelledby="dropdownMenuLink">
-                                <li>
-                                    <a class="dropdown-item" asp-action="Index" asp-controller="Order">كل الطلـــبات</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" asp-action="Create" asp-controller="Order">إضافة طــلب</a>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="dropdown show ">
-                            <a class="nav-link dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown"
-                                style="color: #fff !important;">إدارة الأصناف</a>
-                            <ul class="dropdown-menu text-right" aria-labelledby="dropdownMenuLink">
-                                <li>
-                                    <a class="dropdown-item" asp-action="Index" asp-controller="Categories">كل الأصناف</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" asp-action="Create" asp-controller="Categories">إضافة صنف</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="dropdown show">
-                            <a class="nav-link dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown"
-                                style="color: #fff !important;">إدارة الأقمـشة</a>
-                            <ul class="dropdown-menu text-right" aria-labelledby="dropdownMenuLink">
-                                <li>
-                                    <a class="dropdown-item" asp-action="Index" asp-controller="Draperies">كل الأقمـشة</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" asp-action="Create" asp-controller="Draperies">إضافة قماش</a>
-                                </li>
-                            </ul>
-                        </div>
-
-
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="dropdownId" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" style="color: #fff !important;"> إدارة
+                                    الاقمــشة
+                                </a>
+                                <div class="dropdown-menu text-center" aria-labelledby="dropdownId">
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="Draperies">كل الاقمــشة</a>
+                                    <a class="dropdown-item" asp-action="Create" asp-controller="Draperies">
+                                        إضافة
+                                        قماش
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
                         <div class="collapse navbar-collapse text-white" id="navbarsExample02">
                             <ul class="navbar-nav mr-auto">
                                 <li class="nav-item btn-group" role="group">
@@ -121,7 +106,7 @@
                                         <li class="dropdown-item">
                                             <form class="form-inline" asp-controller="Account" asp-action="Logout">
                                                 @* asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" *@
-                                                <button type="submit" class="nav-link btn btn-link  text-dark">
+                                                <button type="submit" class="nav-link btn btn-link text-dark">
                                                     <i class="fa fa-sign-out-alt"></i>
                                                     تسجيل
                                                     خروج
@@ -132,17 +117,122 @@
                                 </li>
                             </ul>
                         </div>
-                    </nav>
-                </div>
+                    </div>
+                </nav>
             }
-            else
-            {
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <li>
-                        <a class="dropdown-item" asp-action="Login" asp-controller="Account">كل الأصناف</a>
-                    </li>
+            @* @if (User.Identity.IsAuthenticated) *@
+            @* @if (SignInManager.IsSignedIn(User))
+                {
+                <div class="col-md-12 p-0">
+                <nav class="navbar navbar-expand bg-primary py-1">
+                <h4 class="dashboard">
+                <a style="text-decoration: none; color:#fff !important" asp-action="Index"
+                asp-controller="Account">
+                لـوحــة
+                التحــكم
+                </a>
+                </h4>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+
+
+                <div class="dropdown show">
+                <a class="nav-link dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown"
+                style="color: #fff !important;">إدارة العملاء</a>
+                <ul class="dropdown-menu text-right" aria-labelledby="dropdownMenuLink">
+                <li>
+                <a class="dropdown-item" asp-action="Index" asp-controller="Customer">كل العملاء</a>
+                </li>
+                <li>
+                <a class="dropdown-item" asp-action="CustomerForm" asp-controller="Customer">
+                إضافة
+                عميل
+                </a>
+                </li>
                 </ul>
-            }
+                </div>
+
+                <div class="dropdown show">
+                <a class="nav-link dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown"
+                style="color: #fff !important;">إدارة الطلـــبات</a>
+                <ul class="dropdown-menu text-right" aria-labelledby="dropdownMenuLink">
+                <li>
+                <a class="dropdown-item" asp-action="Index" asp-controller="Order">كل الطلـــبات</a>
+                </li>
+                <li>
+                <a class="dropdown-item" asp-action="Create" asp-controller="Order">إضافة طــلب</a>
+                </li>
+                </ul>
+                </div>
+                <div class="dropdown show ">
+                <a class="nav-link dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown"
+                style="color: #fff !important;">إدارة الأصناف</a>
+                <ul class="dropdown-menu text-right" aria-labelledby="dropdownMenuLink">
+                <li>
+                <a class="dropdown-item" asp-action="Index" asp-controller="Categories">كل الأصناف</a>
+                </li>
+                <li>
+                <a class="dropdown-item" asp-action="Create" asp-controller="Categories">إضافة صنف</a>
+                </li>
+                </ul>
+                </div>
+                <div class="dropdown show">
+                <a class="nav-link dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown"
+                style="color: #fff !important;">إدارة الأقمـشة</a>
+                <ul class="dropdown-menu text-right" aria-labelledby="dropdownMenuLink">
+                <li>
+                <a class="dropdown-item" asp-action="Index" asp-controller="Draperies">كل الأقمـشة</a>
+                </li>
+                <li>
+                <a class="dropdown-item" asp-action="Create" asp-controller="Draperies">إضافة قماش</a>
+                </li>
+                </ul>
+                </div>
+
+
+                <div class="collapse navbar-collapse text-white" id="navbarsExample02">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item btn-group" role="group">
+                <a id="btnGroupDrop1" title="Manage" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false"
+                class=" dropdown-toggle nav-link b-primary">@User.Identity.Name</a>
+                <ul class="dropdown-menu text-center " aria-labelledby="btnGroupDrop1">
+                <li class="mav-item">
+                <a class="nav-link" asp-action="Index" asp-controller="Account">
+                <i class="fa fa-cogs" aria-hidden="true"></i>
+                إدارة
+                المستخدمين
+                </a>
+                </li>
+                <hr />
+                <li class="dropdown-item">
+                <form class="form-inline" asp-controller="Account" asp-action="Logout">
+                @* asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" * @
+                <button type="submit" class="nav-link btn btn-link text-dark">
+                <i class="fa fa-sign-out-alt"></i>
+                تسجيل
+                خروج
+                </button>
+                </form>
+                </li>
+                </ul>
+                </li>
+                </ul>
+                </div>
+                </nav>
+                </div>
+                }
+                else
+                {
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li>
+                <a class="dropdown-item" asp-action="Login" asp-controller="Account">كل الأصناف</a>
+                </li>
+                </ul>
+                } *@
         </div>
         <div class="row">
             @RenderBody()

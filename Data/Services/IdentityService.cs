@@ -1,6 +1,6 @@
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using Tarzi_Backend.Data.Repos;
 using Tarzi_Backend.Models;
 
@@ -28,7 +28,7 @@ namespace Tarzi_Backend.Data.Services
                 IdentityResult result = await _userManager.CreateAsync(usr, appUser.PasswordHash);
                 if (result.Succeeded)
                 {
-                    
+
                 }
             }
             catch (System.Exception)

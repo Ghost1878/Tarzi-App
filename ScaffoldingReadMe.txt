@@ -1,3 +1,22 @@
-﻿Support for ASP.NET Core Identity was added to your project.
-
-For setup and configuration information, see https://go.microsoft.com/fwlink/?linkid=2116645.
+﻿DisplayLinkToFirstPage = PagedListDisplayMode.IfNeeded;
+			DisplayLinkToLastPage = PagedListDisplayMode.IfNeeded;
+			DisplayLinkToPreviousPage = PagedListDisplayMode.IfNeeded;
+			DisplayLinkToNextPage = PagedListDisplayMode.IfNeeded;
+			DisplayLinkToIndividualPages = true;
+			DisplayPageCountAndCurrentLocation = false;
+			MaximumPageNumbersToDisplay = 10;
+			DisplayEllipsesWhenNotShowingAllPageNumbers = true;
+			EllipsesFormat = "&#8230;";
+			LinkToFirstPageFormat = "««";
+			LinkToPreviousPageFormat = "«";
+			LinkToIndividualPageFormat = "{0}";
+			LinkToNextPageFormat = "»";
+			LinkToLastPageFormat = "»»";
+			PageCountAndCurrentLocationFormat = "Page {0} of {1}.";
+			ItemSliceAndTotalFormat = "Showing items {0} through {1} of {2}.";
+			FunctionToDisplayEachPageNumber = null;
+			ClassToApplyToFirstListItemInPager = null;
+			ClassToApplyToLastListItemInPager = null;
+			ContainerDivClasses = new [] { "pagination-container" };
+			UlElementClasses = new[] { "pagination" };
+			LiElementClasses = Enumerable.Empty<string>();

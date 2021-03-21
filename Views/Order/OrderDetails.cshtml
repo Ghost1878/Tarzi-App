@@ -1,0 +1,98 @@
+﻿@model Order
+<div class="container m-2 py-2 card shadow">
+    <div class="row">
+        <div class="col-sm-6">
+            <h2>
+                <i class="fa fa-list-alt"></i>
+
+                تفاصيل الطلب
+            </h2>
+        </div>
+        <div class="col-sm-6">
+            <a class="p-2 b-primary float-left mb-1" asp-action="Index">
+                <i class="fa fa-arrow-right"></i>
+                رجوع الى القائمة
+            </a>
+        </div>
+    </div>
+    <div class="row p-2">
+
+        <table class="table table-striped table-inverse">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>اسم العميل</th>
+                    <th>
+                        @if (Model.Customer == null)
+                        {
+
+                            @Model.OrderDetails.CustomerName
+                        }
+                        else
+                        {
+
+                            @Model.Customer.Name
+                        }
+                    </th>
+                    <th>رقم الهاتف</th>
+                    <th>
+                        @if (Model.Customer == null)
+                        {
+
+                            @Model.OrderDetails.Phone
+                        }
+                        else
+                        {
+
+
+                            @Model.Customer.Phone
+                        }
+                    </th>
+                </tr>
+                <tr>
+                    <th>نوع الملبوس</th>
+                    <th>@Model.Category.Name</th>
+                </tr>
+                <tr>
+                    <th>الرقبة</th>
+                    <th>@Model.OrderDetails.Neck <small>سم</small></th>
+                    <th>الكتف</th>
+                    <th>@Model.OrderDetails.Shoulder <small>سم</small></th>
+                </tr>
+                <tr>
+                    <th>الجمبة</th>
+                    <th>@Model.OrderDetails.Side <small>سم</small></th>
+                    <th>الطول</th>
+                    <th>@Model.OrderDetails.Longness <small>سم</small></th>
+
+                </tr>
+                <tr>
+                    <th>الكم</th>
+                    <th>@Model.OrderDetails.SleeveLength <small>سم</small></th>
+
+                    <th>وسع الكم</th>
+                    <th>@Model.OrderDetails.Sleevewasae <small>سم</small></th>
+                </tr>
+                <tr>
+                    <th>الكمية</th>
+                    <th>@Model.OrderDetails.Quantity</th>
+                    <th>اجمالي السعر</th>
+                    <th>@Model.OrderDetails.TotalAmount <small>جنية</small></th>
+                </tr>
+                <tr>
+                </tr>
+                <tr>
+                    <th>المبلغ المدفوع</th>
+                    <th>@Model.OrderDetails.ReceiptMonay<small>جنية</small></th>
+                    <th>المبلغ المتبقي</th>
+                    <th>@Model.OrderDetails.RemanentMonay<small>جنية</small></th>
+                </tr>
+                <tr>
+                    <th>تاريخ الطلب</th>
+                    <th>@Model.OrderDetails.CreatedAt</th>
+                    <th>تاريخ التسليم</th>
+                    <th>@Model.OrderDetails.ReceiptDate</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>

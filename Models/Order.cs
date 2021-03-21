@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using Tarzi_Backend.ViewModels;
 
 namespace Tarzi_Backend.Models
 {
@@ -13,19 +11,16 @@ namespace Tarzi_Backend.Models
 
 
         public int CategoryId { get; set; }
-        //  [ForeignKey("CategoryId")]
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
 
         public int? CustomerId { get; set; }
-        [ForeignKey("CustomerId")]
         public virtual Customer Customer { get; set; }
 
-        public DateTime ReceiptDate { get; set; }
 
-        // [ForeignKey("OrderDetailsId")]
         public int OrderDetailsId { get; set; }
         public virtual OrderDetails OrderDetails { get; set; }
 
+        public DateTime ReceiptDate { get; set; }
     }
 
 }

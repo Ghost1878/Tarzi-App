@@ -10,8 +10,8 @@ using Tarzi_Backend.Data;
 namespace Tarzi_Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210309111557_LastCreateForDB")]
-    partial class LastCreateForDB
+    [Migration("20210320073300_RecreatingDb")]
+    partial class RecreatingDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -256,7 +256,7 @@ namespace Tarzi_Backend.Migrations
 
             modelBuilder.Entity("Tarzi_Backend.Models.Customer", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CustomerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
@@ -280,7 +280,7 @@ namespace Tarzi_Backend.Migrations
                     b.Property<int>("Phone")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("CustomerId");
 
                     b.ToTable("Customers");
                 });
@@ -334,7 +334,7 @@ namespace Tarzi_Backend.Migrations
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("CustomerId1")
+                    b.Property<int>("CustomerId1")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedAt")
@@ -494,7 +494,9 @@ namespace Tarzi_Backend.Migrations
 
                     b.HasOne("Tarzi_Backend.Models.Customer", "Customer")
                         .WithMany("Orders")
-                        .HasForeignKey("CustomerId1");
+                        .HasForeignKey("CustomerId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
 

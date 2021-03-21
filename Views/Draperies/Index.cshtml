@@ -24,6 +24,8 @@
                         <th>اسم القماش</th>
                         <th>الوصف</th> 
                         <th>الكمية المتوفرة (متر)</th>
+                        <th>تاريخ الإضافة</th> 
+                    
                         <th>العمــليات</th>
                     </tr>
                 </thead>
@@ -52,6 +54,11 @@
 
                 </tbody>
             </table>
+            @Html.PagedListPager((IPagedList)Model,page =>Url.Action("Index",new{page}),new PagedListRenderOptionsBase{
+                ContainerDivClasses =new [] {"navigation"},
+                LiElementClasses = new [] {"page-item"},
+                PageClasses = new [] {"page-link"}, 
+            })
         }
         else
         {

@@ -1,7 +1,6 @@
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using Tarzi_Backend.Data.Services;
 
 namespace Tarzi_Backend.Controllers.Apis

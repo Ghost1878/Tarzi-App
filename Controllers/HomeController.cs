@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Tarzi_Backend.Data.Repos;
+using System.Diagnostics;
 using Tarzi_Backend.Data.Services;
 using Tarzi_Backend.Models;
 
@@ -32,7 +26,7 @@ namespace Tarzi_Backend.Controllers
         }
         public IActionResult Index()
         {
-           if (!User.Identity.IsAuthenticated)
+            if (!User.Identity.IsAuthenticated)
                 return View();
             return RedirectToAction("DashBoard", "Account");
         }

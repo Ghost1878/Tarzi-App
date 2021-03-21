@@ -1,21 +1,23 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 using Tarzi_Backend.Data.Services;
 using Tarzi_Backend.Models;
 using Tarzi_Backend.ViewModels;
+using X.PagedList;
 
 namespace Tarzi_Backend.Controllers
 {
-   // [Authorize]
+    // [Authorize]
     public class AccountController : Controller
     {
         private UserManager<ApplicationUser> _userManager;
         private readonly CustomerService _customerService;
         private SignInManager<ApplicationUser> _singInManager;
+        [BindProperty]
+        public ApplicationUser ApplicationUser { get; set; }
         public AccountController(CustomerService customerService, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _singInManager = signInManager;
@@ -24,30 +26,81 @@ namespace Tarzi_Backend.Controllers
         }
         public IActionResult Dashboard()
         {
-          
-
-                return View();
-             
-            //return RedirectToAction(nameof(Login));
-
+            return View();
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? page)
         {
             var users = await _userManager.Users.ToListAsync();
             if (users == null)
             {
                 return View();
             }
-            return View(users);
+            var UsersList = users.ToPagedList(pageNumber: page ?? 1, pageSize: 25);
+            return View(UsersList);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+                return NotFound();
+
+            var viewModel = new UserProfileViewModel
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber
+            };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(UserProfileViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var user = _userManager.FindByIdAsync(model.Id);
+            if (user == null)
+                return NotFound();
+
+            var userWithSameEmail = await _userManager.FindByEmailAsync(model.Email);
+
+            if (userWithSameEmail != null && userWithSameEmail.Id != model.Id)
+            {
+                ModelState.AddModelError("Email", "This email is already assigned to another user!");
+                return View(model);
+            }
+            user.Result.FirstName = model.FirstName;
+            user.Result.LastName = model.LastName;
+            user.Result.PhoneNumber = model.PhoneNumber;
+            user.Result.Email = model.Email;
+            await _userManager.UpdateAsync(user.Result);
+            //var userWithSameName = await _userManager.FindByNameAsync(applicationUser.UserName);
+            //if (userWithSameName != null && userWithSameName.Id != applicationUser.Id)
+            //{
+            //    ModelState.AddModelError("UserName", "This UserName is already assigned to another user!");
+            //    return View(applicationUser);
+            //}
+
+            TempData["message"] = "تم تعديل بيانات المستخدم بنجاح!";
+
+            return RedirectToAction(nameof(Index));
         }
 
 
-        [HttpGet]
-        public async Task< IActionResult> Register(string userId)
+
+
+        public async Task<IActionResult> Register(string userId)
         {
-            if (userId ==string.Empty)
+            ApplicationUser = new ApplicationUser();
+            if (userId == string.Empty)
             {
-            return View();
+                return View(ApplicationUser);
             }
             else
             {
@@ -93,8 +146,8 @@ namespace Tarzi_Backend.Controllers
             {
                 return RedirectToAction(nameof(Dashboard));
             }
-                ViewData["ReturnUrl"] = returnUrl;
-                return   View();
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
         }
         [HttpPost]
         public async Task<IActionResult> Login(Login user, string returnUrl = null)

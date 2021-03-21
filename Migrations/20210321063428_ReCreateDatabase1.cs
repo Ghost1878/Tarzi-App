@@ -2,34 +2,9 @@
 
 namespace Tarzi_Backend.Migrations
 {
-    public partial class AllowCustomerIdToBeNull1 : Migration
+    public partial class ReCreateDatabase1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Orders_Customers_CustomerId",
-                table: "Orders");
-
-            migrationBuilder.RenameColumn(
-                name: "CustomerId",
-                table: "Orders",
-                newName: "CustomerId1");
-
-            migrationBuilder.RenameIndex(
-                name: "IX_Orders_CustomerId",
-                table: "Orders",
-                newName: "IX_Orders_CustomerId1");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Orders_Customers_CustomerId1",
-                table: "Orders",
-                column: "CustomerId1",
-                principalTable: "Customers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
-        }
-
-        protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_Orders_Customers_CustomerId1",
@@ -50,8 +25,33 @@ namespace Tarzi_Backend.Migrations
                 table: "Orders",
                 column: "CustomerId",
                 principalTable: "Customers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                principalColumn: "CustomerId",
+                onDelete: ReferentialAction.Cascade);
+        }
+
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Orders_Customers_CustomerId",
+                table: "Orders");
+
+            migrationBuilder.RenameColumn(
+                name: "CustomerId",
+                table: "Orders",
+                newName: "CustomerId1");
+
+            migrationBuilder.RenameIndex(
+                name: "IX_Orders_CustomerId",
+                table: "Orders",
+                newName: "IX_Orders_CustomerId1");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Orders_Customers_CustomerId1",
+                table: "Orders",
+                column: "CustomerId1",
+                principalTable: "Customers",
+                principalColumn: "CustomerId",
+                onDelete: ReferentialAction.Cascade);
         }
     }
 }

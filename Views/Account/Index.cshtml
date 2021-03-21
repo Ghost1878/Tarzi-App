@@ -1,4 +1,4 @@
-@model List< ApplicationUser>
+@model IEnumerable<ApplicationUser>
 
 <div class="container-fluid mt-2 mx-4 py-2 card shadow">
     <div class="row">
@@ -9,8 +9,15 @@
             </h3>
         </div>
         <div class="col-sm-6">
-            <a class="btn b-primary float-left mb-1" asp-action="Register">إضافة مستخدم جديد</a>
+            <a class="p-2 b-primary float-left mb-1" asp-action="Register">
+                <i class="fa fa-plus mr-0"></i> 
+                إضافة مستخدم جديد
+            </a>
         </div>
+    </div>
+
+    <div class="row">
+        <div id="message" class="d-none">@TempData["message"]</div>
     </div>
     <div class="row">
 
@@ -27,16 +34,86 @@
                 @foreach (var user in Model)
                 {
                     <tr>
-                        <td>@user.FirstName @user.LastName</td>
-                        <td>@user.Email</td>
-                        <td>@user.PhoneNumber</td>
+                        <td><i class="fa fa-user-alt d-none-sm" ></i> @user.FirstName @user.LastName</td>
+                        <td><i class="fa fa-envelope"></i> @user.Email</td>
+                        <td><i class="fa fa-mobile-alt"></i> @user.PhoneNumber</td>
                         <td>
-                            <a class="border p-1 btn" asp-action="Register" asp-route-id="@user.Id">تعديل</a> |
-                            <a asp-action="Delete" asp-route-id="@user.Id" class="btn b-delete p-1">حذف</a>
+                            <a class="border p-1 btn ml-2" asp-action="Edit" asp-route-userId="@user.Id">
+                                <i class="fa fa-pen"></i>
+                                تعديل
+                            </a>
+                                <a id="" href="javascript:;" data-id="@user.Id" class="js-delete btn b-delete p-1">
+                                <i class="fa fa-trash-alt"></i>
+                            حذف</a>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
+        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }), new PagedListRenderOptionsBase
+        {
+                PageClasses = new[] { "page-link" },
+                LiElementClasses = new[] { "page-item" },
+                ContainerDivClasses = new[] { "pagination" }
+            })
     </div>
 </div>
+@section Scripts{
+
+    <script>
+
+        $(document).ready(function () {
+            var message = $('#message').text();
+            if (message != '') {
+                toastr.info(message, "تعديل المستخدم");
+            }
+        });
+
+
+        $('.js-delete').on('click', function () {
+
+            var btn = $(this);
+            var Url = '/api/ApiAccount/' + btn.data('id');
+            bootbox.confirm({
+                message: "هل تريد حذف هذا المستخدم؟",
+                buttons: {
+                    confirm: {
+                        label: 'نعم',
+                        className: 'btn-danger mr-2'
+                    },
+                    cancel: {
+                        label: 'لا',
+                        className: 'd-default border'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        if (result) {
+                            $.ajax({
+                                url: Url,
+                                method: 'DELETE',
+                                success: function () {
+                                    toastr.error('تم حذف العميل بنجاح!')
+                                },
+                                error: function () {
+                                    toastr.warning('خطأ اثناء عملية الحذف')
+                                }
+
+                            });
+                        }
+
+                    }
+                }
+            });
+        });
+
+
+
+
+
+
+
+
+
+    </script>
+}

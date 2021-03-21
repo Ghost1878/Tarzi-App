@@ -1,6 +1,6 @@
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using Tarzi_Backend.Data.Services;
 using Tarzi_Backend.Models;
 using X.PagedList;
@@ -25,10 +25,10 @@ namespace Tarzi_Backend.Controllers
         public async Task<IActionResult> Index(int? page)
         {
             var customers = await _repo.GetAll();
-                
-            var pageNumber = page ?? 1;
-            int pageSize = 1; 
-            var onPageOfCustomer = customers.ToPagedList(pageNumber, pageSize); 
+
+            // var pageNumber = page ?? 1;
+            // int pageSize = 25;
+            var onPageOfCustomer = customers.ToPagedList(page ?? 1, 25);
             return View(onPageOfCustomer);
         }
 
@@ -79,7 +79,7 @@ namespace Tarzi_Backend.Controllers
                 //    return RedirectToAction("Index");
                 //}
 
-                if (Customer.Id == 0)
+                if (Customer.CustomerId == 0)
                 {
                     await _repo.Add(Customer);
                     TempData["message"] = "تم إضافة العميل بنجاح";
@@ -123,7 +123,7 @@ namespace Tarzi_Backend.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Remove()
         {
-            var id = Customer.Id;
+            var id = Customer.CustomerId;
             await _repo.Delete(id);
             return RedirectToAction("Index");
         }

@@ -1,13 +1,13 @@
-@model ApplicationUser
+﻿@model UserProfileViewModel
 
 @{
-    ViewData["Title"] = "إضافة مستخدم جديد";
+    ViewData["Title"] = "تعديل بيانات المستخدم ";
 }
 <div class="container shadow border my-2">
     <div class="row  bg-primary">
         <div class="col-sm-6 px-0">
             <h4 class="text-white p-2">
-                إضافة مستخدم
+                تعديل بيانات المستخدم
             </h4>
         </div>
         <div class="col-sm-6">
@@ -16,7 +16,8 @@
     </div>
     <div class="row">
         <div class="col-md-8 p-2">
-            <form asp-action="Register" method="POST">
+            <form asp-action="Edit" method="POST">
+                <input type="hidden" asp-for="Id" />
                 <div class="form-group">
                     <label asp-for="FirstName">الاسم الاول</label>
                     <input asp-for="FirstName" class="form-control" />
@@ -37,11 +38,11 @@
                     <input asp-for="Email" class="form-control" />
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                @*<div class="form-group">
                     <label asp-for="PasswordHash">كلمة المرور</label>
                     <input asp-for="PasswordHash" class="form-control" />
                     <span asp-validation-for="PasswordHash" class="text-danger"></span>
-                </div>
+                </div>*@
                 <div class="form-group">
                     <input type="submit" value="حــفظ" class="btn b-primary float-left" />
                 </div>
@@ -49,7 +50,6 @@
         </div>
     </div>
 </div>
-
 @section Scripts{ 
 <partial name="_ValidationScriptsPartial" />
 }

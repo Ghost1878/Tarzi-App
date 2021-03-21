@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -7,7 +6,7 @@ namespace Tarzi_Backend.Models
     public class Customer : Shared
     {
         [Key]
-        public int Id { get; set; }
+        public int CustomerId { get; set; }
 
         [Required]
         [Display(Name = "إسم العميل")]

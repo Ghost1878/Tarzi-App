@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Category>
 
-<div class="container-fluid mx-4 py-2 card shadow">
+<div class="container-fluid m-2 py-2 card shadow">
     <div class="row">
         <div class="col-sm-6">
             <h2>
@@ -48,6 +48,11 @@
                     }
                 </tbody>
             </table>
+            @Html.PagedListPager((IPagedList)Model,page=> Url.Action("Index",new {page}),new PagedListRenderOptionsBase{
+                ContainerDivClasses = new[] {"pagination"},
+                LiElementClasses  = new[]{"page-item"},
+                PageClasses = new[] {"page-link"}
+            })
         }
         else
         {
@@ -62,9 +67,9 @@
         $(document).ready(function () {
             var message  = $('#message').text(); 
                   if(message !== '')
-                {    
-                toastr.info(message);
-                }  
+                  {    
+                    toastr.info(message);
+                  }  
                     
 
             $('.js-delete').on('click', function () {

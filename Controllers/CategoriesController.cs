@@ -1,12 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Tarzi_Backend.Data.Services;
 using Tarzi_Backend.Models;
+using X.PagedList;
 
 namespace Tarzi_Backend.Controllers
 {
@@ -22,10 +18,11 @@ namespace Tarzi_Backend.Controllers
             _categoryService = categoryService;
         }
         // GET: CategoriesController
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? page)
         {
             var Categories = await _categoryService.GetAll();
-            return View(Categories);
+            var categoriesList = Categories.ToPagedList(page ?? 1, 25);
+            return View(categoriesList);
         }
 
         [Route("categories/category-form")]

@@ -15603,6 +15603,11 @@
   "RootNamespace": "Tarzi_Backend",
   "Documents": [
     {
+      "FilePath": "c:\\Users\\Mohammed\\Pictures\\Tarzi-Backend\\Views\\Order\\OrderDetails.cshtml",
+      "TargetPath": "Views\\Order\\OrderDetails.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\Mohammed\\Pictures\\Tarzi-Backend\\Views\\_ViewImports.cshtml",
       "TargetPath": "Views\\_ViewImports.cshtml",
       "FileKind": "mvc"
@@ -15725,6 +15730,11 @@
     {
       "FilePath": "c:\\Users\\Mohammed\\Pictures\\Tarzi-Backend\\Views\\Categories\\Create.cshtml",
       "TargetPath": "Views\\Categories\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\Mohammed\\Pictures\\Tarzi-Backend\\Views\\Account\\Edit.cshtml",
+      "TargetPath": "Views\\Account\\Edit.cshtml",
       "FileKind": "mvc"
     }
   ],

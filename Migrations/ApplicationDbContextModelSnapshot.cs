@@ -254,7 +254,7 @@ namespace Tarzi_Backend.Migrations
 
             modelBuilder.Entity("Tarzi_Backend.Models.Customer", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CustomerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
@@ -278,7 +278,7 @@ namespace Tarzi_Backend.Migrations
                     b.Property<int>("Phone")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("CustomerId");
 
                     b.ToTable("Customers");
                 });
@@ -332,7 +332,7 @@ namespace Tarzi_Backend.Migrations
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("CustomerId1")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedAt")
@@ -348,7 +348,7 @@ namespace Tarzi_Backend.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("CustomerId1");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Orders");
                 });
@@ -492,7 +492,9 @@ namespace Tarzi_Backend.Migrations
 
                     b.HasOne("Tarzi_Backend.Models.Customer", "Customer")
                         .WithMany("Orders")
-                        .HasForeignKey("CustomerId1");
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
 

@@ -1,15 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Tarzi_Backend.Data.Services;
-using Tarzi_Backend.Models; 
-using System.Globalization;
-using Humanizer.Localisation.DateToOrdinalWords;
-using Humanizer;
+using Tarzi_Backend.Models;
+using X.PagedList;
 
 namespace Tarzi_Backend.Controllers
 {
@@ -25,12 +18,11 @@ namespace Tarzi_Backend.Controllers
             _draperiesService = draperiesService;
         }
         // GET: DraperiesController
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? page)
         {
-          //  CultureInfo culture = new CultureInfo("ar-AR");
-           //  var date = DateTime.Now.AddDays(-2).Humanize(culture:culture);
             var DraperiesType = await _draperiesService.GetAll();
-            return View(DraperiesType);
+            var DraperiesList = DraperiesType.ToPagedList(pageNumber: page ?? 1, pageSize: 25);
+            return View(DraperiesList);
         }
         // GET: DraperiesController/Create
         [HttpGet]

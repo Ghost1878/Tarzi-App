@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Tarzi_Backend.Data.Repos
 {
@@ -16,6 +13,8 @@ namespace Tarzi_Backend.Data.Repos
         {
             _db = db;
         }
+
+        public IEnumerable<T> CountRecords { get; set; }
 
         public async Task Add(T t)
         {
